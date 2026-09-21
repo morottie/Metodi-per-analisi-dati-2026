@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Basi di Python &#8212; Metodi Numerici per l&#39;analisi dati - LAB</title>
+    <title>Programmazione in Python &#8212; Metodi Numerici per l&#39;analisi dati - LAB</title>
   
   
   
@@ -65,7 +65,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'my_ipynb/1_lab_python';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Visualizzazione di dati in Python" href="2_lab_dataViz.html" />
+    <link rel="next" title="Grafica con Matplotlib" href="2_lab_matplotlib.html" />
     <link rel="prev" title="Laboratorio di Metodi Numerici per l’analisi dati" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,8 +171,8 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basi di Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_lab_dataViz.html">Visualizzazione di dati in Python</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Programmazione in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_lab_matplotlib.html">Grafica con Matplotlib</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_hm1.html">Homework 1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_hm2.html">Homework 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_hm3.html">Homework 3</a></li>
@@ -359,7 +359,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Basi di Python</h1>
+    <h1>Programmazione in Python</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -380,8 +380,6 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#array-di-tipo-tuple">Array di tipo <code class="docutils literal notranslate"><span class="pre">tuple</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#array-di-tipo-range">Array di tipo <code class="docutils literal notranslate"><span class="pre">range</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-slicing-per-le-strutture-ordinate">Lo slicing per le strutture ordinate</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#set"><code class="docutils literal notranslate"><span class="pre">set</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dict"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -394,16 +392,9 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#organizzazione-del-codice">(3) Organizzazione del codice</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funzioni">3.1 Funzioni</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moduli-e-pacchetti">3.2 Moduli e pacchetti</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#percorsi">3.3 Percorsi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misurare-il-tempo-macchina">3.4 Misurare il tempo macchina</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errori-nel-codice">3.5 Errori nel codice</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#come-leggere-un-traceback">Come leggere un traceback</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#errori-frequenti">Errori frequenti</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">(4) Esercizi</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi-parte-1-basi-di-python">(4) Esercizi - parte 1: basi di python</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-1">Esercizio 1.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-2">Esercizio 2.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-3">Esercizio 3.</a></li>
@@ -411,7 +402,20 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-5">Esercizio 5.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-6">Esercizio 6.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-7">Esercizio 7.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-8">Esercizio 8.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy">(5) NumPy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gli-array-ndarray">5.1 Gli array <code class="docutils literal notranslate"><span class="pre">ndarray</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creazione-di-vettori-e-matrici">5.2 Creazione di vettori e matrici</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funzioni-elemento-per-elemento-su-ndarray">5.3 Funzioni elemento-per-elemento su <code class="docutils literal notranslate"><span class="pre">ndarray</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-fra-vettori-e-matrici">5.4 Operazioni fra vettori e matrici</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi-parte-2-numpy">(6) Esercizi - parte 2: NumPy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Esercizio 1.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Esercizio 2.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Esercizio 3.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Esercizio 4.</a></li>
 </ul>
 </li>
 </ul>
@@ -425,8 +429,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="basi-di-python">
-<h1>Basi di Python<a class="headerlink" href="#basi-di-python" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="programmazione-in-python">
+<h1>Programmazione in Python<a class="headerlink" href="#programmazione-in-python" title="Link to this heading">#</a></h1>
 <p>Python è oggi uno dei linguaggi di programmazione più diffusi e viene utilizzato in numerosi ambiti, dallo sviluppo software alla Data Science, dal Machine Learning al calcolo scientifico. La sua popolarità è dovuta soprattutto alla sintassi chiara, alla grande disponibilità di librerie specializzate e a una comunità di sviluppatori molto ampia.</p>
 <p>In questo corso daremo per acquisita una conoscenza di base del funzionamento e della sintassi di Python. Tuttavia, prima di affrontare le librerie e gli strumenti specifici per il calcolo numerico, in questo notebook richiameremo brevemente alcuni elementi fondamentali del linguaggio.</p>
 <p>In particolare, rivedremo la definizione e l’uso delle variabili, i principali tipi di dato, gli operatori, le strutture condizionali e iterative, le principali strutture dati e la definizione di funzioni.</p>
@@ -700,6 +704,8 @@ World!
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeri</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">]</span> 
 <span class="n">nomi</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Anna&quot;</span><span class="p">,</span> <span class="s2">&quot;Maria&quot;</span><span class="p">,</span> <span class="s2">&quot;Daniel&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatima&quot;</span><span class="p">,</span> <span class="s2">&quot;Lucas&quot;</span><span class="p">,</span> <span class="s2">&quot;Sara&quot;</span><span class="p">,</span> <span class="s2">&quot;Mohamed&quot;</span><span class="p">,</span> <span class="s2">&quot;Andrei&quot;</span><span class="p">,</span> <span class="s2">&quot;Blerina&quot;</span><span class="p">]</span> 
 <span class="n">lista_vuota</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">numeri</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -708,14 +714,20 @@ World!
 Gli indici negativi permettono di contare gli elementi a partire dalla fine: -1 indica l’ultimo elemento, -2 il penultimo e così via.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">numeri</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">numeri</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">numeri</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> 
 <span class="nb">print</span><span class="p">(</span><span class="n">numeri</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  
 <span class="nb">print</span><span class="p">(</span><span class="n">numeri</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> 
 <span class="nb">print</span><span class="p">(</span><span class="n">nomi</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">nomi</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;il massimo valore è: </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">numeri</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;il minimo valore è: </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">numeri</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nomi</span><span class="p">))</span> <span class="c1"># len restituisce il numero di elementi</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nomi</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span>  <span class="c1"># IndexError: list index out of range</span>
+<span class="c1"># print(nomi[12])  # IndexError: list index out of range</span>
 </pre></div>
 </div>
 </div>
@@ -737,27 +749,7 @@ Le liste sono <strong>modificabili</strong> (mutable): è possibile sostituire, 
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Alcuni metodi utili:</span>
-
-<span class="n">nomi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Amina&quot;</span><span class="p">)</span> 
-<span class="n">nomi</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;Daniel&quot;</span><span class="p">)</span> <span class="c1"># inserisce Daniel nella posizione 4 </span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nomi</span><span class="p">)</span>
-
-<span class="n">nomi</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Daniel&quot;</span><span class="p">)</span> <span class="c1"># elimina la prima occorrenza di Daniel </span>
-<span class="n">ultimo</span> <span class="o">=</span> <span class="n">nomi</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c1"># elimina e restituisce l&#39;ultimo elemento </span>
-<span class="nb">print</span><span class="p">(</span><span class="n">ultimo</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nomi</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">numeri</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;il massimo valore è: </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">numeri</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;il minimo valore è: </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">numeri</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="n">numeri</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span> <span class="c1"># ordina la lista </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeri</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span> <span class="c1"># ordina la lista </span>
 <span class="nb">print</span><span class="p">(</span><span class="n">numeri</span><span class="p">)</span>
 <span class="n">numeri</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span> <span class="c1"># inverte l&#39;ordine degli elementi</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">numeri</span><span class="p">)</span>
@@ -813,18 +805,6 @@ Le liste sono <strong>modificabili</strong> (mutable): è possibile sostituire, 
 <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>     
 <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> 
 <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Attenzione: per creare una tupla con un solo elemento è necessaria la virgola</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">)</span>    <span class="c1"># int</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,)</span>   <span class="c1"># tuple</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -900,16 +880,9 @@ Un range contiene però solo numeri interi ed è utilizzato soprattutto nei cicl
 <p>L’elemento nella posizione inizio è incluso, mentre quello nella posizione fine è escluso.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">nomi</span><span class="p">)</span>     <span class="c1"># list</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">nomi</span><span class="p">)</span>     
 <span class="nb">print</span><span class="p">(</span><span class="n">nomi</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">nomi</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>        <span class="c1"># tupla</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>        <span class="c1"># range</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -925,89 +898,6 @@ Un range contiene però solo numeri interi ed è utilizzato soprattutto nei cicl
 </pre></div>
 </div>
 </div>
-</div>
-</section>
-<section id="set">
-<h4><code class="docutils literal notranslate"><span class="pre">set</span></code><a class="headerlink" href="#set" title="Link to this heading">#</a></h4>
-<p>Un <strong>insieme</strong> è una collezione non ordinata di elementi distinti. Si definisce racchiudendo gli elementi tra parentesi graffe.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numeri</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
-</pre></div>
-</div>
-<p>Gli elementi duplicati vengono eliminati automaticamente:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numeri</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">numeri</span><span class="p">)</span>  <span class="c1"># {1, 2, 3}</span>
-</pre></div>
-</div>
-<p>Poiché un insieme non è ordinato, i suoi elementi non possono essere recuperati mediante un indice:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numeri</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="c1"># TypeError: &#39;set&#39; object is not subscriptable</span>
-</pre></div>
-</div>
-<p>È possibile aggiungere e rimuovere elementi:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numeri</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">numeri</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Gli insiemi supportano le principali operazioni insiemistiche:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
-<span class="n">B</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">A</span> <span class="o">|</span> <span class="n">B</span><span class="p">)</span>  <span class="c1"># unione: {1, 2, 3, 4, 5}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">A</span> <span class="o">&amp;</span> <span class="n">B</span><span class="p">)</span>  <span class="c1"># intersezione: {3}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span><span class="p">)</span>  <span class="c1"># differenza: {1, 2}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">A</span> <span class="o">^</span> <span class="n">B</span><span class="p">)</span>  <span class="c1"># differenza simmetrica: {1, 2, 4, 5}</span>
-</pre></div>
-</div>
-<p>Un insieme vuoto deve essere creato con <code class="docutils literal notranslate"><span class="pre">set()</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">insieme_vuoto</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>La scrittura <code class="docutils literal notranslate"><span class="pre">{}</span></code> crea invece un dizionario vuoto.</p>
-</section>
-<section id="dict">
-<h4><code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#dict" title="Link to this heading">#</a></h4>
-<p>Un <strong>dizionario</strong> memorizza associazioni tra <strong>chiavi</strong> e <strong>valori</strong>. Si definisce mediante parentesi graffe, separando ogni chiave dal valore corrispondente con i due punti.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">studente</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;nome&quot;</span><span class="p">:</span> <span class="s2">&quot;Anna&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;matricola&quot;</span><span class="p">:</span> <span class="mi">12345</span><span class="p">,</span>
-    <span class="s2">&quot;voto&quot;</span><span class="p">:</span> <span class="mi">28</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>A differenza delle sequenze, i valori non vengono recuperati mediante un indice numerico, ma attraverso la chiave associata:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">studente</span><span class="p">[</span><span class="s2">&quot;nome&quot;</span><span class="p">])</span>  <span class="c1"># Anna</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">studente</span><span class="p">[</span><span class="s2">&quot;voto&quot;</span><span class="p">])</span>  <span class="c1"># 28</span>
-</pre></div>
-</div>
-<p>Le chiavi devono essere uniche. Se si assegna nuovamente un valore a una chiave esistente, il valore precedente viene sostituito:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">studente</span><span class="p">[</span><span class="s2">&quot;voto&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">30</span>
-</pre></div>
-</div>
-<p>È possibile aggiungere una nuova coppia chiave-valore:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">studente</span><span class="p">[</span><span class="s2">&quot;corso&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Analisi numerica&quot;</span>
-</pre></div>
-</div>
-<p>e rimuoverla:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">del</span> <span class="n">studente</span><span class="p">[</span><span class="s2">&quot;matricola&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>Alcuni metodi utili sono:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">studente</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>    <span class="c1"># restituisce le chiavi</span>
-<span class="n">studente</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>  <span class="c1"># restituisce i valori</span>
-<span class="n">studente</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>   <span class="c1"># restituisce le coppie chiave-valore</span>
-</pre></div>
-</div>
-<p>Il metodo <code class="docutils literal notranslate"><span class="pre">get()</span></code> permette di cercare una chiave evitando un errore se questa non è presente:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">studente</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;nome&quot;</span><span class="p">))</span>            <span class="c1"># Anna</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">studente</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;età&quot;</span><span class="p">))</span>             <span class="c1"># None</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">studente</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;età&quot;</span><span class="p">,</span> <span class="s2">&quot;non nota&quot;</span><span class="p">))</span> <span class="c1"># non nota</span>
-</pre></div>
-</div>
-<p>Con le parentesi quadre, invece, una chiave inesistente produce un <code class="docutils literal notranslate"><span class="pre">KeyError</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">studente</span><span class="p">[</span><span class="s2">&quot;età&quot;</span><span class="p">])</span>
-<span class="c1"># KeyError: &#39;età&#39;</span>
-</pre></div>
 </div>
 </section>
 </section>
@@ -1043,20 +933,6 @@ Un range contiene però solo numeri interi ed è utilizzato soprattutto nei cicl
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
-
-<span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x è positivo&quot;</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x è negativo&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x è zero&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>Nelle condizioni, usiamo gli operatori di confronto e/o logici</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1072,25 +948,6 @@ Un range contiene però solo numeri interi ed è utilizzato soprattutto nei cicl
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="ow">not</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">c</span> <span class="o">=</span> <span class="mi">3</span>
-
-<span class="n">condition_1</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">condition_1</span><span class="p">)</span>
-<span class="n">condition_2</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">condition_2</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="p">(</span><span class="n">condition_1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">condition_2</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ok!&quot;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No!&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1289,15 +1146,17 @@ che rappresenta un passo del metodo di Newton per la ricerca degli zeri di (f).<
 <li><p>un modulo è normalmente un singolo file Python .py contenente funzioni, classi o variabili;</p></li>
 <li><p>un pacchetto è una cartella che organizza più moduli ed eventualmente altri sottopacchetti.</p></li>
 </ul>
-<p>Alcuni moduli, come <code class="docutils literal notranslate"><span class="pre">math</span></code> e <code class="docutils literal notranslate"><span class="pre">random</span></code>, fanno parte della libreria standard e sono disponibili senza installazioni aggiuntive. Per utilizzarli è necessario importarli con il comando <code class="docutils literal notranslate"><span class="pre">import</span></code>, poi si accede agli elementi scrivendo il nome del modulo seguito da un punto:</p>
+<p>Alcuni moduli, come <code class="docutils literal notranslate"><span class="pre">os</span></code>, <code class="docutils literal notranslate"><span class="pre">math</span></code> e <code class="docutils literal notranslate"><span class="pre">random</span></code>, fanno parte della libreria standard e sono disponibili senza installazioni aggiuntive. Per utilizzarli è necessario importarli con il comando <code class="docutils literal notranslate"><span class="pre">import</span></code>, poi si accede agli elementi scrivendo il nome del modulo seguito da un punto:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load in memoria</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>  <span class="c1"># Current Working Directory</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="c1"># Numero casuale nell&#39;intervallo [0, 1)</span>
-<span class="n">y</span><span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Esponenziale di x</span>
+<span class="n">y</span><span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>      <span class="c1"># Esponenziale di x</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1325,7 +1184,7 @@ che rappresenta un passo del metodo di Newton per la ricerca degli zeri di (f).<
 </div>
 </div>
 </div>
-<p><strong>Nota</strong>: il modulo <code class="docutils literal notranslate"><span class="pre">math</span></code> opera principalmente su singoli valori numerici. Per applicare funzioni matematiche a vettori, matrici o array si utilizza normalmente la libreria NumPy.</p>
+<p><strong>Nota</strong>: il modulo <code class="docutils literal notranslate"><span class="pre">math</span></code> opera principalmente su <em>singoli</em> valori numerici. Per applicare funzioni matematiche a vettori, matrici o array si utilizza normalmente la libreria NumPy.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Costanti matematiche</span>
@@ -1391,211 +1250,9 @@ che rappresenta un passo del metodo di Newton per la ricerca degli zeri di (f).<
 <li><p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> per l’elaborazione di grafici.</p></li>
 </ul>
 </section>
-<section id="percorsi">
-<h3>3.3 Percorsi<a class="headerlink" href="#percorsi" title="Link to this heading">#</a></h3>
-<p>Un <strong>percorso</strong> (<em>path</em>) è l’indirizzo che identifica la posizione di un file o di una cartella nel file system. Saper costruire correttamente un percorso è necessario, per esempio, per caricare un dataset contenuto in un file <code class="docutils literal notranslate"><span class="pre">.csv</span></code>.</p>
-<p>Esistono due tipi principali di percorso:</p>
-<ul class="simple">
-<li><p>un <em>percorso assoluto</em> specifica la posizione completa del file: <code class="docutils literal notranslate"><span class="pre">C:\Users\utente\Desktop\corso\dati\file.csv</span></code></p></li>
-<li><p>un <em>percorso relativo</em> descrive la posizione del file rispetto alla cartella di lavoro corrente: <code class="docutils literal notranslate"><span class="pre">dati\file.csv</span></code></p></li>
-</ul>
-<p>La cartella rispetto alla quale vengono interpretati i percorsi relativi è la <em>cartella di lavoro corrente</em> (current working directory, cwd). In un Jupyter Notebook la cartella di lavoro è quella da cui è stato avviato il kernel e non coincide necessariamente con la cartella nella quale è salvato il notebook.</p>
-<p>È possibile visualizzare la cwd usando il modulo <code class="docutils literal notranslate"><span class="pre">os</span></code> della libreria standard:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Per costruire percorsi è consigliabile utilizzare <code class="docutils literal notranslate"><span class="pre">pathlib</span></code>, che gestisce automaticamente le differenze tra sistemi operativi:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-
-<span class="n">cartella_corrente</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
-<span class="n">percorso_file</span> <span class="o">=</span> <span class="n">cartella_corrente</span> <span class="o">/</span> <span class="s2">&quot;dati&quot;</span> <span class="o">/</span> <span class="s2">&quot;file.csv&quot;</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">cartella_corrente</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">percorso_file</span><span class="p">)</span>
-
-<span class="c1"># Controllo se il file esiste:</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">percorso_file</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Possiamo ottenere la lista dei nomi del file in una determinata cartella con:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">percorso_dati</span> <span class="o">=</span> <span class="n">cartella_corrente</span> <span class="o">/</span> <span class="s2">&quot;dati&quot;</span> 
-<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">percorso_dati</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
-<section id="misurare-il-tempo-macchina">
-<h3>3.4 Misurare il tempo macchina<a class="headerlink" href="#misurare-il-tempo-macchina" title="Link to this heading">#</a></h3>
-<p>L’efficienza è un aspetto fondamentale degli algoritmi numerici, che spesso operano su grandi quantità di dati. Un primo modo per confrontare algoritmi diversi consiste nel misurarne il <em>tempo di esecuzione</em>.</p>
-<p>Il tempo dipende dal computer utilizzato e dalle operazioni eseguite contemporaneamente dal sistema; è quindi una misura indicativa, ma utile per confrontare più implementazioni nelle stesse condizioni.</p>
-<p>Il modulo <code class="docutils literal notranslate"><span class="pre">time</span></code> della libreria standard fornisce le funzioni <code class="docutils literal notranslate"><span class="pre">perf_counter()</span></code> e <code class="docutils literal notranslate"><span class="pre">time.time()</span></code>, che salvano il tempo istananeo e lo salvano in una variabile.
-Possiamo quindi misurare gli intervalli di tempo così:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-
-<span class="n">ripetizioni</span> <span class="o">=</span> <span class="mi">20000</span>
-
-<span class="c1"># Salvo l&#39;istante temporale di partenza</span>
-<span class="n">inizio</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
-<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ripetizioni</span><span class="p">):</span>
-    <span class="n">somma</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">))</span>
-
-<span class="c1"># Salvo l&#39;istante temporale di fine</span>
-<span class="n">fine</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
-<span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-
-<span class="c1"># L&#39;intervallo di tempo è datao dalla differenza dei tempi di inizio-fine</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tempo di esecuzione: </span><span class="si">{</span><span class="p">(</span><span class="n">fine</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">inizio</span><span class="p">)</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2"> secondi&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
-
-<span class="n">tempo_medio</span> <span class="o">=</span> <span class="p">(</span><span class="n">fine</span> <span class="o">-</span> <span class="n">inizio</span><span class="p">)</span> <span class="o">/</span> <span class="n">ripetizioni</span> 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tempo medio: </span><span class="si">{</span><span class="n">tempo_medio</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2"> secondi&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">inizio</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">inizio</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">start_time</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">start_time</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="errori-nel-codice">
-<h3>3.5 Errori nel codice<a class="headerlink" href="#errori-nel-codice" title="Link to this heading">#</a></h3>
-<p>La gestione degli errori è una parte fondamentale della programmazione. Gli errori possono verificarsi per molte ragioni, come un dato di ingresso non valido, una divisione per zero o il tentativo di accedere a un file inesistente. Python fornisce strumenti per intercettare e gestire questi problemi, evitando che il programma si interrompa in modo inatteso e facilitando il <strong>debugging</strong>.</p>
-<p>Quando si verifica un errore, Python genera un messaggio chiamato <strong>traceback</strong>, che contiene informazioni sul tipo di errore, sulla riga di codice in cui si è verificato e sulla sequenza di chiamate che ha condotto al problema. Imparare a leggere il traceback è essenziale per individuare e correggere la causa di un errore.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">divisione</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
-
-<span class="c1"># Errore perchè non si può dividere per zero</span>
-<span class="n">divisione</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="come-leggere-un-traceback">
-<h4>Come leggere un traceback<a class="headerlink" href="#come-leggere-un-traceback" title="Link to this heading">#</a></h4>
-<p>Il traceback può essere interpretato nel modo seguente:</p>
-<ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Traceback</span> <span class="pre">(most</span> <span class="pre">recent</span> <span class="pre">call</span> <span class="pre">last)</span></code></strong>: introduce la sequenza delle chiamate che hanno condotto all’errore.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Cell</span> <span class="pre">In</span> <span class="pre">[...],</span> <span class="pre">line</span> <span class="pre">5</span></code></strong>: indica la cella e la riga da cui è stata chiamata la funzione.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Cell</span> <span class="pre">In</span> <span class="pre">[...],</span> <span class="pre">line</span> <span class="pre">2,</span> <span class="pre">in</span> <span class="pre">divisione</span></code></strong>: segnala che l’errore si è verificato nella funzione <code class="docutils literal notranslate"><span class="pre">divisione</span></code>, alla riga 2.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">ZeroDivisionError:</span> <span class="pre">division</span> <span class="pre">by</span> <span class="pre">zero</span></code></strong>: specifica il tipo di errore (<code class="docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code>) e la sua causa (<code class="docutils literal notranslate"><span class="pre">division</span> <span class="pre">by</span> <span class="pre">zero</span></code>).</p></li>
-</ul>
-<p>In generale, per interpretare un traceback conviene partire dall’ultima riga, che contiene il tipo e il messaggio dell’errore, e risalire poi alle righe di codice indicate.</p>
-</section>
-<section id="errori-frequenti">
-<h4>Errori frequenti<a class="headerlink" href="#errori-frequenti" title="Link to this heading">#</a></h4>
-<ol class="arabic simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">SyntaxError</span></code></strong>: la sintassi del codice non è valida, per esempio per la mancanza di una parentesi o dei due punti.</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="mi">10</span> <span class="o">&gt;</span> <span class="mi">5</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;esempio di Syntax Error&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<ol class="arabic simple" start="2">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">TypeError</span></code></strong>: un’operazione viene applicata a un oggetto di tipo non appropriato.</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;10&quot;</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<ol class="arabic simple" start="3">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">NameError</span></code></strong>: viene utilizzata una variabile o una funzione che non è stata definita.</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">pippo</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<ol class="arabic simple" start="4">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">IndexError</span></code></strong>: si tenta di accedere a un indice inesistente di una sequenza.</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<ol class="arabic simple" start="5">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">ValueError</span></code></strong>: il tipo dell’argomento è corretto, ma il suo valore non è accettabile.</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="s2">&quot;abc&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<ol class="arabic simple" start="6">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">IndentationError</span></code></strong>: l’indentazione è mancante o incoerente.</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
-
-<span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x è positivo&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<ol class="arabic simple" start="7">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></strong>: il file indicato non esiste oppure il percorso non è corretto.</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">cartella_corrente</span> <span class="o">/</span> <span class="s2">&quot;dati&quot;</span> <span class="o">/</span> <span class="s2">&quot;file.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<ol class="arabic simple" start="8">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code></strong>: si tenta di dividere per zero.</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="n">risultato</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-</section>
-<section id="esercizi">
-<h2>(4) Esercizi<a class="headerlink" href="#esercizi" title="Link to this heading">#</a></h2>
+<section id="esercizi-parte-1-basi-di-python">
+<h2>(4) Esercizi - parte 1: basi di python<a class="headerlink" href="#esercizi-parte-1-basi-di-python" title="Link to this heading">#</a></h2>
 <section id="esercizio-1">
 <h3>Esercizio 1.<a class="headerlink" href="#esercizio-1" title="Link to this heading">#</a></h3>
 <p>Assegna alle variabili <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code> e <code class="docutils literal notranslate"><span class="pre">c</span></code> rispettivamente un intero, un numero decimale e una stringa.
@@ -1646,44 +1303,383 @@ Stampa valore e tipo di ciascuna variabile.</p>
 <ul class="simple">
 <li><p>la loro somma;</p></li>
 <li><p>il loro prodotto;</p></li>
-<li><p>il maggiore dei due.
-Recupera i tre risultati mediante unpacking.</p></li>
+<li><p>il maggiore dei due.</p></li>
 </ul>
+<p>Recupera i tre risultati mediante unpacking.</p>
 </section>
-<section id="esercizio-8">
-<h3>Esercizio 8.<a class="headerlink" href="#esercizio-8" title="Link to this heading">#</a></h3>
-<p>Prevedi i risultati dei seguenti codici, prima di eseguirli.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</section>
+<section id="numpy">
+<h2>(5) NumPy<a class="headerlink" href="#numpy" title="Link to this heading">#</a></h2>
+<p>Numpy è la principale libreria Python per la rappresentazione e la manipolazione efficiente di vettori, matrici e array multidimensionali. Durante il corso utilizzeremo NumPy insieme a SciPy, che mette a disposizione algoritmi più avanzati per il calcolo scientifico.</p>
+<p><strong>NOTA:</strong> NumPy viene generalmente importato assegnandogli l’alias convenzionale <code class="docutils literal notranslate"><span class="pre">np</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </pre></div>
 </div>
-</div>
-</div>
+<p>quindi tutte le sue funzioni saranno richiamate mediante il prefisso <code class="docutils literal notranslate"><span class="pre">np.</span></code>, per esempio:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">funzione</span><span class="p">():</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="n">funzione</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>Se NumPy non è disponibile nell’ambiente Python, può essere installato dal terminale con:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span>
+</pre></div>
+</div>
+<p>oppure, in un ambiente Conda, con:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">numpy</span>
+</pre></div>
+</div>
+<p>Per maggiori informazioni è possibile consultare la documentazione ufficiale di NumPy <a class="reference external" href="https://numpy.org">numpy.org</a>.</p>
+<section id="gli-array-ndarray">
+<h3>5.1 Gli array <code class="docutils literal notranslate"><span class="pre">ndarray</span></code><a class="headerlink" href="#gli-array-ndarray" title="Link to this heading">#</a></h3>
+<p>L’oggetto principale di <code class="docutils literal notranslate"><span class="pre">numpy</span></code> è il cosiddetto <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>, che si usa per definire vettori, matrici e tensori “con proprietà” matematiche.</p>
+<p>Un modo semplice per definire un <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> è partire da oggetti python come <code class="docutils literal notranslate"><span class="pre">list</span></code> o <code class="docutils literal notranslate"><span class="pre">tuple</span></code>, poi convertirli in oggetto <code class="docutils literal notranslate"><span class="pre">np</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
-<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="c1"># Partiamo da una lista Python</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+<span class="c1"># Converto la lista in un numpy array</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Caso per una matrice 3x3</span>
+<span class="n">A</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Partiamo da una tupla Python</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">19</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+
+<span class="c1"># Converto la tupla in un numpy array</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+
+<span class="c1"># Converto l&#39;array vettoriale in matrice</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;B = </span><span class="si">{</span><span class="n">B</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Una proprietà importante degli array NumPy è la presenza di alcuni <em>attributi</em> che ne descrivono la struttura e il contenuto:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">shape</span></code>: dimensione dell’array lungo ciascun asse;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ndim</span></code>: numero di dimensioni, o assi, dell’array;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: numero totale di elementi;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dtype</span></code>: tipo numerico degli elementi.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># shape (3, )</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Come per gli oggetti di Python, facciamo slicing su un vettore <code class="docutils literal notranslate"><span class="pre">v</span></code> usando la notazione <code class="docutils literal notranslate"><span class="pre">v[start:end:step]</span> </code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creazione dell&#39;array</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+<span class="c1"># Slicing</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="creazione-di-vettori-e-matrici">
+<h3>5.2 Creazione di vettori e matrici<a class="headerlink" href="#creazione-di-vettori-e-matrici" title="Link to this heading">#</a></h3>
+<p>Nelle applicazioni reali si lavora spesso con vettori e matrici di grandi dimensioni, che possono contenere milioni di elementi. Non è quindi possibile definirli inserendo manualmente tutti i valori.</p>
+<p>Quando i dati seguono una struttura particolare, NumPy mette a disposizione diverse funzioni per creare gli array in modo semplice ed efficiente.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">np.linspace(a,</span> <span class="pre">b,</span> <span class="pre">n)</span></code>: crea un vettore contenente <code class="docutils literal notranslate"><span class="pre">n</span></code> valori equidistanti nell’intervallo chiuso <span class="math notranslate nohighlight">\([a,b]\)</span>, estremi inclusi.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.arange(start,</span> <span class="pre">end,</span> <span class="pre">step)</span></code>: crea un vettore di valori compresi tra <code class="docutils literal notranslate"><span class="pre">start</span></code> incluso e <code class="docutils literal notranslate"><span class="pre">end</span></code> escluso, con incremento <code class="docutils literal notranslate"><span class="pre">step</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.zeros((m,</span> <span class="pre">n))</span></code>: crea una matrice <span class="math notranslate nohighlight">\(m \times n\)</span> contenente solo zeri.  Nel caso di <code class="docutils literal notranslate"><span class="pre">np.zeros((m,</span> <span class="pre">))</span></code> si ottiene un vettore.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.ones((m,</span> <span class="pre">n))</span></code>: crea una matrice <span class="math notranslate nohighlight">\(m \times n\)</span> contenente solo elementi uguali a uno.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.zeros_like(a)</span></code>: crea un array di zeri con la stessa forma e lo stesso tipo di dato di <code class="docutils literal notranslate"><span class="pre">a</span></code>. Analogamente, si può usare <code class="docutils literal notranslate"><span class="pre">np.zeros(a.shape)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.random.randn(m,</span> <span class="pre">n)</span></code>: crea una matrice <span class="math notranslate nohighlight">\(m \times n\)</span> i cui elementi sono estratti indipendentemente da una distribuzione normale standard <span class="math notranslate nohighlight">\(\mathcal{N}(0, I)\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.eye(n)</span></code>: crea la matrice identità di ordine <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.diag(v)</span></code>: dato un vettore <code class="docutils literal notranslate"><span class="pre">v</span></code> di shape <code class="docutils literal notranslate"><span class="pre">(n,)</span></code>, crea una matrice diagonale <span class="math notranslate nohighlight">\(n \times n\)</span> i cui elementi diagonali sono quelli di <code class="docutils literal notranslate"><span class="pre">v</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="c1"># array([0. , 0.25, 0.5 , 0.75, 1. ])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;E=</span><span class="si">{</span><span class="n">E</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> 
+<span class="n">H</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;H=</span><span class="si">{</span><span class="n">H</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;I=</span><span class="si">{</span><span class="n">I</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> 
+<span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L=</span><span class="si">{</span><span class="n">L</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="funzioni-elemento-per-elemento-su-ndarray">
+<h3>5.3 Funzioni elemento-per-elemento su <code class="docutils literal notranslate"><span class="pre">ndarray</span></code><a class="headerlink" href="#funzioni-elemento-per-elemento-su-ndarray" title="Link to this heading">#</a></h3>
+<p>Molte funzioni NumPy hanno un corrispondente tra le funzioni di base di Python o nel modulo <code class="docutils literal notranslate"><span class="pre">math</span></code>, ma sono progettate per lavorare elemento per elemento sugli array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+
+<span class="c1"># Funzioni base</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>   <span class="c1"># al posto di math.sqrt()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>    <span class="c1"># al posto di math.exp()</span>
+<span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>    <span class="c1"># al posto di math.log()</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>    <span class="c1"># al posto di math.sin()</span>
+<span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>    <span class="c1"># al posto di math.cos()</span>
+<span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>    <span class="c1"># analoga ad abs()</span>
+
+<span class="c1"># Operazioni di aggregazione</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>     <span class="c1"># analoga a sum()</span>
+<span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>     <span class="c1"># analoga a min()</span>
+<span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>     <span class="c1"># analoga a max()</span>
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>    <span class="c1"># media</span>
+<span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>     <span class="c1"># deviazione standard</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Nota:</strong> Mentre le liste sono strutture Python generiche e progettate per raccogliere anche oggetti di tipo diverso, gli array NumPy contengono invece elementi generalmente omogenei e sono progettati per eseguire operazioni numeriche <em>vettoriali</em> in modo compatto ed efficiente.</p>
+<blockquote>
+<div><p>Ne deriva che lo stesso operatore può assumere significati diversi a seconda del tipo di oggetto sul quale viene applicato!</p>
+</div></blockquote>
+<p>Esempio 1:</p>
+<ul class="simple">
+<li><p>Per una lista Python, la moltiplicazione per un intero ripete gli elementi della lista;</p></li>
+<li><p>Per un array NumPy, invece, la moltiplicazione per uno scalare viene applicata elemento per elemento.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Attenzione!</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>     <span class="c1"># lista</span>
+
+<span class="n">x2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>             <span class="c1"># [1, 2, 3, 1, 2, 3]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+
+<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>   <span class="c1"># array([2, 4, 6])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esempio 2:</p>
+<ul class="simple">
+<li><p>Per una lista Python, la somma di liste è una concatenazione;</p></li>
+<li><p>Per un array NumPy, invece, la somma viene calcolata elemento per elemento.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> 
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>      
+
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>                          <span class="c1"># concatenazione</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">)</span>    <span class="c1"># somma elemento per elemento</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="operazioni-fra-vettori-e-matrici">
+<h3>5.4 Operazioni fra vettori e matrici<a class="headerlink" href="#operazioni-fra-vettori-e-matrici" title="Link to this heading">#</a></h3>
+<p>Per semplificare l’implementazione degli algoritmi di algebra lineare numerica, le operazioni fra gli array NumPy seguono essenzialmente la stessa sintassi utilizzata nei testi di matematica. Quindi, anche tutte (o quasi) le operazioni fra vettori e matrici vengono applicate elemento per elemento.</p>
+<blockquote>
+<div><p>Un’operazione fra due array <span class="math notranslate nohighlight">\(n\)</span>-dimensionali <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span> si dice <em>elemento per elemento</em> quando viene applicata separatamente a ogni coppia di elementi corrispondenti di <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span>.</p>
+</div></blockquote>
+<p>Per esempio, consideriamo i vettori:</p>
+<p><span class="math notranslate nohighlight">\(
+a = \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} \qquad b = \begin{bmatrix} 0 \\ 2 \\ 2 \end{bmatrix}
+\)</span></p>
+<p>e la loro somma elemnt-wise è:</p>
+<p><span class="math notranslate nohighlight">\(
+a + b = \begin{bmatrix} 1 + 0 \\ 0 + 2 \\ -1 + 2 \end{bmatrix} = \begin{bmatrix} 1 \\ 2 \\ 1 \end{bmatrix}.
+\)</span></p>
+<p>Vediamo ora le principali operazioni elemento per elemento, fra due generici array NumPy <code class="docutils literal notranslate"><span class="pre">a</span></code> e <code class="docutils literal notranslate"><span class="pre">b</span></code> che hanno la stessa shape (vettori o matrici).</p>
+<ul class="simple">
+<li><p>a + b: restituisce la somma elemento per elemento di a e b.</p></li>
+<li><p>a - b: restituisce la differenza elemento per elemento fra a e b.</p></li>
+<li><p>a * b: restituisce il prodotto elemento per elemento di a e b.</p></li>
+<li><p>a / b: restituisce il quoziente elemento per elemento fra a e b.</p></li>
+<li><p>a ** b: eleva ogni elemento di a alla potenza indicata dal corrispondente elemento di b.</p></li>
+</ul>
+<p>Nell’algebra lineare numerica sono particolarmente importanti le operazioni di:</p>
+<ul class="simple">
+<li><p>prodotto matrice-vettore;</p></li>
+<li><p>prodotto matrice-matrice;</p></li>
+<li><p>prodotto scalare fra vettori.</p></li>
+</ul>
+<p>Poiché queste operazioni sono strettamente collegate dal punto di vista matematico, NumPy utilizza per tutte lo stesso operatore <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>: se le shape di due array <code class="docutils literal notranslate"><span class="pre">a</span></code> e <code class="docutils literal notranslate"><span class="pre">b</span></code> sono compatibili, <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&#64;</span> <span class="pre">b</span></code> esegue il loro prodotto corrispondente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Creazione della matrice</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+   <span class="c1"># [2,  1, 1]</span>
+<span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c1"># Creazione dei vettori</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prodotto scalare</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">@</span> <span class="n">x2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x1</span><span class="o">*</span><span class="n">x2</span><span class="p">)</span>  <span class="c1"># Prodotto element-wise</span>
+
+<span class="c1"># Il prodotto scalare fra due vettori può essere calcolato in modo equivalente mediante:</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prodotti matrice-vettore</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x1</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A @ x1 =&quot;</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A @ x2 =&quot;</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcolo di A(x1 + x2)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span><span class="p">)</span>
+
+<span class="c1"># Verifica della proprietà distributiva</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">y1</span><span class="o">+</span><span class="n">y2</span><span class="p">)</span>          <span class="c1"># [ True  True]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">y2</span><span class="p">)</span>  <span class="c1"># True</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="esercizi-parte-2-numpy">
+<h2>(6) Esercizi - parte 2: NumPy<a class="headerlink" href="#esercizi-parte-2-numpy" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Esercizio 1.<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Crea l’array NumPy <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">[2,</span> <span class="pre">4,</span> <span class="pre">6,</span> <span class="pre">8,</span> <span class="pre">10,</span> <span class="pre">12]</span></code> e stampa:</p>
+<ul class="simple">
+<li><p>numero di dimensioni;</p></li>
+<li><p>shape;</p></li>
+<li><p>numero complessivo di elementi;</p></li>
+<li><p>tipo dei dati.</p></li>
+</ul>
+<p>Successivamente crea la matrice <code class="docutils literal notranslate"><span class="pre">A</span></code> di shape (2, 3) dai valori di <code class="docutils literal notranslate"><span class="pre">a</span></code>, e stampa:</p>
+<ul class="simple">
+<li><p>A;</p></li>
+<li><p>shape;</p></li>
+<li><p>numero complessivo di elementi.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>Esercizio 2.<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Considera i vettori lista <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> e <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">[4,</span> <span class="pre">5,</span> <span class="pre">6]</span></code>. Prevedi il risultato delle seguenti istruzioni:</p>
+<ul class="simple">
+<li><p>print(a + b)</p></li>
+<li><p>print(np.array(a) + np.array(b))</p></li>
+<li><p>print(3 * a)</p></li>
+<li><p>print(3 * np.array(a))</p></li>
+<li><p>print(a*b)</p></li>
+<li><p>print(np.array(a) * np.array(b))</p></li>
+<li><p>print(np.array(a) &#64; np.array(b))</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>Esercizio 3.<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>Crea con NumPy un array <code class="docutils literal notranslate"><span class="pre">a</span></code> contenente <code class="docutils literal notranslate"><span class="pre">n</span></code> (n&gt;4) numeri equispaziati, fra 0 a 18.</p>
+<ul class="simple">
+<li><p>Stampa l’array e la sua shape.</p></li>
+<li><p>Estrai i primi 3 elementi usando lo slicing.</p></li>
+<li><p>Seleziona gli elementi maggiori di 10 facendo uso di un vettore booleano (maschera logica).</p></li>
+<li><p>Calcola la somma e la media di tutti gli elementi di <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></li>
+<li><p>Crea un nuovo array <code class="docutils literal notranslate"><span class="pre">b</span></code> contenente i quadrati degli elementi di <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>Esercizio 4.<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>Definisci <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">np.array([1,</span> <span class="pre">2,</span> <span class="pre">-1])</span></code> e <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span>&#160; <span class="pre">np.array([</span> <span class="pre">[1,</span>&#160; <span class="pre">2,</span> <span class="pre">0],</span>&#160;&#160;&#160; <span class="pre">[0,</span> <span class="pre">-1,</span> <span class="pre">3],</span>&#160;&#160; <span class="pre">[2,</span>&#160; <span class="pre">1,</span> <span class="pre">1]</span> <span class="pre">])</span></code>, poi:</p>
+<ul class="simple">
+<li><p>Calcola a mano <span class="math notranslate nohighlight">\(Ax\)</span>;</p></li>
+<li><p>Verifica il risultato usando l’operatore &#64;;</p></li>
+<li><p>Stampa la shape di A, di x e del risultato;</p></li>
+<li><p>Calcola A * x e spiega cosa rappresenta.</p></li>
+</ul>
 </section>
 </section>
 </section>
@@ -1728,11 +1724,11 @@ Recupera i tre risultati mediante unpacking.</p></li>
       </div>
     </a>
     <a class="right-next"
-       href="2_lab_dataViz.html"
+       href="2_lab_matplotlib.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Visualizzazione di dati in Python</p>
+        <p class="prev-next-title">Grafica con Matplotlib</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1765,8 +1761,6 @@ Recupera i tre risultati mediante unpacking.</p></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#array-di-tipo-tuple">Array di tipo <code class="docutils literal notranslate"><span class="pre">tuple</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#array-di-tipo-range">Array di tipo <code class="docutils literal notranslate"><span class="pre">range</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-slicing-per-le-strutture-ordinate">Lo slicing per le strutture ordinate</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#set"><code class="docutils literal notranslate"><span class="pre">set</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dict"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1779,16 +1773,9 @@ Recupera i tre risultati mediante unpacking.</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#organizzazione-del-codice">(3) Organizzazione del codice</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funzioni">3.1 Funzioni</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moduli-e-pacchetti">3.2 Moduli e pacchetti</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#percorsi">3.3 Percorsi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#misurare-il-tempo-macchina">3.4 Misurare il tempo macchina</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errori-nel-codice">3.5 Errori nel codice</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#come-leggere-un-traceback">Come leggere un traceback</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#errori-frequenti">Errori frequenti</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">(4) Esercizi</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi-parte-1-basi-di-python">(4) Esercizi - parte 1: basi di python</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-1">Esercizio 1.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-2">Esercizio 2.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-3">Esercizio 3.</a></li>
@@ -1796,7 +1783,20 @@ Recupera i tre risultati mediante unpacking.</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-5">Esercizio 5.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-6">Esercizio 6.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-7">Esercizio 7.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-8">Esercizio 8.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy">(5) NumPy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gli-array-ndarray">5.1 Gli array <code class="docutils literal notranslate"><span class="pre">ndarray</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creazione-di-vettori-e-matrici">5.2 Creazione di vettori e matrici</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funzioni-elemento-per-elemento-su-ndarray">5.3 Funzioni elemento-per-elemento su <code class="docutils literal notranslate"><span class="pre">ndarray</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-fra-vettori-e-matrici">5.4 Operazioni fra vettori e matrici</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi-parte-2-numpy">(6) Esercizi - parte 2: NumPy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Esercizio 1.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Esercizio 2.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Esercizio 3.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Esercizio 4.</a></li>
 </ul>
 </li>
 </ul>
