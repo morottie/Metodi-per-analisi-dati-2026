@@ -65,7 +65,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'my_ipynb/2_lab_matplotlib';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Homework 1" href="3_hm1.html" />
+    <link rel="next" title="Homework 2" href="4_hm2.html" />
     <link rel="prev" title="Programmazione in Python" href="1_lab_python.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -173,7 +173,6 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_lab_python.html">Programmazione in Python</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Grafica con Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_hm1.html">Homework 1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_hm2.html">Homework 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_hm3.html">Homework 3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_hm4.html">Homework 4</a></li>
@@ -381,10 +380,8 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-1">Esercizio 1.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-2">Esercizio 2.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-3">Esercizio 3.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-data">1. Plotting data</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-data-with-pandas">Read data with <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -426,7 +423,7 @@ Il grafico deve essere poi visualizzato mediante <code class="docutils literal n
 <span class="c1"># Creo i vettori</span>
 <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -438,7 +435,24 @@ Il grafico deve essere poi visualizzato mediante <code class="docutils literal n
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f865567c4dd84e06b536944e17c6478fe34a9bdc7e135139b43eebdee74fa5e1.png" src="../_images/f865567c4dd84e06b536944e17c6478fe34a9bdc7e135139b43eebdee74fa5e1.png" />
+<img alt="../_images/6e3920d396bdb4180d22d93521e7f5b325259bd4d08d72103506e624a98c02ed.png" src="../_images/6e3920d396bdb4180d22d93521e7f5b325259bd4d08d72103506e624a98c02ed.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.         0.6981317  1.3962634  2.0943951  2.7925268  3.4906585
+ 4.1887902  4.88692191 5.58505361 6.28318531]
+[ 0.00000000e+00  6.42787610e-01  9.84807753e-01  8.66025404e-01
+  3.42020143e-01 -3.42020143e-01 -8.66025404e-01 -9.84807753e-01
+ -6.42787610e-01 -2.44929360e-16]
+</pre></div>
+</div>
 </div>
 </div>
 <p>Per impostazione predefinita, i punti vengono collegati da una linea seguendo l’ordine con cui compaiono nei due array.</p>
@@ -459,11 +473,10 @@ Il grafico deve essere poi visualizzato mediante <code class="docutils literal n
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[4.86290927 2.75755456 5.39472984 4.38169255 0.59173373 6.13001603
- 4.78238179 4.93898769 0.80496169 2.82985831 2.3297927  5.82303616
- 4.04552386 5.16956368 2.78605358]
+ 4.78238179 4.93898769 0.80496169 2.82985831]
 </pre></div>
 </div>
-<img alt="../_images/fe2ba2ea5062b36cbeca95819b7777eea7ae428cca72c41164cc6174c12df903.png" src="../_images/fe2ba2ea5062b36cbeca95819b7777eea7ae428cca72c41164cc6174c12df903.png" />
+<img alt="../_images/41dfa3c629d242d64572dfd9acf305ef900b81adb7b558c7d723162e14a5494e.png" src="../_images/41dfa3c629d242d64572dfd9acf305ef900b81adb7b558c7d723162e14a5494e.png" />
 </div>
 </div>
 <section id="personalizzare-il-grafico">
@@ -580,7 +593,7 @@ Il grafico deve essere poi visualizzato mediante <code class="docutils literal n
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>  
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;o-&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;o:&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;A plot of f(x) = sin(x)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y = sin(x)&#39;</span><span class="p">)</span>
@@ -590,7 +603,7 @@ Il grafico deve essere poi visualizzato mediante <code class="docutils literal n
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3ba91ca91b6ee8d46672daac4dc53e43ffac283620ae054f6975cc87fbf64a52.png" src="../_images/3ba91ca91b6ee8d46672daac4dc53e43ffac283620ae054f6975cc87fbf64a52.png" />
+<img alt="../_images/73dded46d075cb266467204d96b6e50d011bedd02e2412f14b96f95f0aa8250a.png" src="../_images/73dded46d075cb266467204d96b6e50d011bedd02e2412f14b96f95f0aa8250a.png" />
 </div>
 </div>
 </section>
@@ -695,7 +708,7 @@ Il grafico deve essere poi visualizzato mediante <code class="docutils literal n
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\elena\AppData\Local\Temp\ipykernel_36952\2032523598.py:11: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\elena\AppData\Local\Temp\ipykernel_29860\2032523598.py:11: RuntimeWarning: divide by zero encountered in log
   y2 = np.log(x)
 </pre></div>
 </div>
@@ -740,7 +753,7 @@ Il grafico deve essere poi visualizzato mediante <code class="docutils literal n
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a005f0d40134c7d244b9089bdc5a6df599c189dd0da212d696a82ef62a8ebb10.png" src="../_images/a005f0d40134c7d244b9089bdc5a6df599c189dd0da212d696a82ef62a8ebb10.png" />
+<img alt="../_images/11cf763a62c017eb4c36724d955974c10f9017c938636cedff25a143da0429d1.png" src="../_images/11cf763a62c017eb4c36724d955974c10f9017c938636cedff25a143da0429d1.png" />
 </div>
 </div>
 </section>
@@ -828,7 +841,7 @@ Aggiungi al plot il titolo, le etichette degli assi e la griglia.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x2150ee4da90&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1d40cf10ad0&gt;]
 </pre></div>
 </div>
 <img alt="../_images/c6de0fb724d305b0dfe13b225ed6387632b641c9a9b2413c8fdb9753f52fbd1a.png" src="../_images/c6de0fb724d305b0dfe13b225ed6387632b641c9a9b2413c8fdb9753f52fbd1a.png" />
@@ -857,61 +870,6 @@ Aggiungi al plot il titolo, le etichette degli assi e la griglia.</p>
 </div>
 </div>
 </section>
-<section id="plotting-data">
-<h3>1. Plotting data<a class="headerlink" href="#plotting-data" title="Link to this heading">#</a></h3>
-<p>Going back to the example in the introductory post on Numpy where we introduced the library pandas, useful to read data into Python, we can now use matplotlib to visualize it.</p>
-<p>First of all, download (if required) the <a class="reference external" href="https://virtuale.unibo.it/mod/resource/view.php?id=1002928">data</a> from Virtuale or equivalently by Kaggle at the following link: <a class="reference external" href="https://www.kaggle.com/mysarahmadbhat/us-births-2000-to-2014">www.kaggle.com/mysarahmadbhat/us-births-2000-to-2014</a>, and place the <em>.csv</em> file into the same folder of your <code class="docutils literal notranslate"><span class="pre">.py</span></code> file. Then, with the help of what you studied in the introductory post,</p>
-<ul class="simple">
-<li><p>Import the data into Python;</p></li>
-<li><p>Explore the data by visualizing the first rows and the columns of it (the function <code class="docutils literal notranslate"><span class="pre">data.head()</span></code> from pandas can be useful), or alternatively, use the data documentation on <a class="reference external" href="https://www.kaggle.com/mysarahmadbhat/us-births-2000-to-2014">www.kaggle.com/mysarahmadbhat/us-births-2000-to-2014</a>;</p></li>
-<li><p>Create a new column, <code class="docutils literal notranslate"><span class="pre">total_date</span></code>, representing each date into an increasing number, the days since the beginning of the data collection;</p></li>
-<li><p>Plot the number of birth with respect to <code class="docutils literal notranslate"><span class="pre">total_date</span></code> to visualize the incremental number of birth during the years;</p></li>
-<li><p><em>Optional:</em> Plot an barplot (<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html">matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html</a>) of the number of birth with respect to the day of the week and investigate if there are asymetries in the birth number in some days of the week.</p></li>
-</ul>
-</section>
-</section>
-<section id="read-data-with-pandas">
-<h2>Read data with <code class="docutils literal notranslate"><span class="pre">pandas</span></code><a class="headerlink" href="#read-data-with-pandas" title="Link to this heading">#</a></h2>
-<p>Since we will frequently work with data, it will be important to be able to manipulate them. In this class, we will learn how to load a dataset into Python by using a library called <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, whose documentation can be found <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/index.html#user-guide">here</a>.</p>
-<p>As an example, download the data from Kaggle at the following link: <a class="reference external" href="https://www.kaggle.com/mysarahmadbhat/us-births-2000-to-2014">www.kaggle.com/mysarahmadbhat/us-births-2000-to-2014</a>.</p>
-<p>Then, place it in the same folder as the Python file on which you are working and use the following code to load it in memory.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-
-<span class="c1"># Read data from a csv file</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/US_births_2000-2014_SSA.csv&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Read data from a csv file</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/US_births_2000-2014_SSA.csv&#39;</span><span class="p">)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<p>Pandas uses similar function name as numpy to keep everything coherent. For example, we can check the shape of <code class="docutils literal notranslate"><span class="pre">data</span></code> by using the function <code class="docutils literal notranslate"><span class="pre">print(data.shape)</span></code>. Moreover, a pandas dataframe can be casted into a numpy array by simply</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="c1"># Cast into numpy array</span>
-<span class="n">np_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-<span class="c1"># Check that the dimension didn&#39;t change</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> should be equal to </span><span class="si">{</span><span class="n">np_data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 
@@ -955,11 +913,11 @@ Aggiungi al plot il titolo, le etichette degli assi e la griglia.</p>
       </div>
     </a>
     <a class="right-next"
-       href="3_hm1.html"
+       href="4_hm2.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Homework 1</p>
+        <p class="prev-next-title">Homework 2</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -993,10 +951,8 @@ Aggiungi al plot il titolo, le etichette degli assi e la griglia.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-1">Esercizio 1.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-2">Esercizio 2.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-3">Esercizio 3.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-data">1. Plotting data</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-data-with-pandas">Read data with <code class="docutils literal notranslate"><span class="pre">pandas</span></code></a></li>
 </ul>
   </nav></div>
 

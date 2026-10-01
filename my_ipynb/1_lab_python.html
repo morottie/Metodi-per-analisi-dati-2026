@@ -173,7 +173,6 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Programmazione in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_lab_matplotlib.html">Grafica con Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_hm1.html">Homework 1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_hm2.html">Homework 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_hm3.html">Homework 3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="6_hm4.html">Homework 4</a></li>
@@ -1353,6 +1352,12 @@ Stampa valore e tipo di ciascuna variabile.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;list&#39;&gt;
+[1 2 3] &lt;class &#39;numpy.ndarray&#39;&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1421,6 +1426,17 @@ Stampa valore e tipo di ciascuna variabile.</p>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0  3 -4  2  1  7]
+[ 3 -4]
+[ 0  3 -4]
+[2 1 7]
+7
+[ 0 -4  1]
+[ 7  1  2 -4  3  0]
 </pre></div>
 </div>
 </div>
@@ -1521,6 +1537,12 @@ Stampa valore e tipo di ciascuna variabile.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 1, 2, 3] &lt;class &#39;list&#39;&gt;
+[2 4 6] &lt;class &#39;numpy.ndarray&#39;&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <p>Esempio 2:</p>
 <ul class="simple">
@@ -1534,6 +1556,12 @@ Stampa valore e tipo di ciascuna variabile.</p>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>                          <span class="c1"># concatenazione</span>
 <span class="nb">print</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">)</span>    <span class="c1"># somma elemento per elemento</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4, 5, 6]
+[5 7 9]
 </pre></div>
 </div>
 </div>
@@ -1588,6 +1616,14 @@ a + b = \begin{bmatrix} 1 + 0 \\ 0 + 2 \\ -1 + 2 \end{bmatrix} = \begin{bmatrix}
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1  2  0]
+ [ 0 -1  3]]
+[1 2 3]
+[ 2 -1  1]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1602,6 +1638,13 @@ a + b = \begin{bmatrix} 1 + 0 \\ 0 + 2 \\ -1 + 2 \end{bmatrix} = \begin{bmatrix}
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+[ 2 -2  3]
+3
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1611,6 +1654,12 @@ a + b = \begin{bmatrix} 1 + 0 \\ 0 + 2 \\ -1 + 2 \end{bmatrix} = \begin{bmatrix}
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A @ x1 =&quot;</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A @ x2 =&quot;</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A @ x1 = [5 7]
+A @ x2 = [0 4]
 </pre></div>
 </div>
 </div>
