@@ -28,27 +28,30 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-predizioni = []
+numCorretti = np.sum(predizioni == y_test)
+print(numCorretti)
+numTot = predizioni.size()
+print(numTot)
+print(f"Accuratezza: {numCorretti/numTot:.2%}")
 
-for x in X_test:
-    classe = classifica(x, U0, label0, U1, label1)
-    predizioni.append(classe)
 
-predizioni = np.array(predizioni)
-print(predizioni)
+# accuracy = np.mean(predizioni == y_test)
+# print(f"Accuratezza: {accuracy:.2%}")
 ------------------
 
+----- stdout -----
+108
+------------------
 
 [31m---------------------------------------------------------------------------[39m
-[31mNameError[39m                                 Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[12][39m[32m, line 4[39m
-[32m      1[39m predizioni = []
-[32m      2[39m 
-[32m      3[39m [38;5;28;01mfor[39;00m x [38;5;28;01min[39;00m X_test:
-[32m----> [39m[32m4[39m     classe = classifica(x, U0, label0, U1, label1)
-[32m      5[39m     predizioni.append(classe)
+[31mTypeError[39m                                 Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[14][39m[32m, line 3[39m
+[32m      1[39m numCorretti = np.sum(predizioni == y_test)
+[32m      2[39m print(numCorretti)
+[32m----> [39m[32m3[39m numTot = predizioni.size()
+[32m      4[39m print(numTot)
+[32m      5[39m print(f"Accuratezza: {numCorretti/numTot:.2%}")
 [32m      6[39m 
-[32m      7[39m predizioni = np.array(predizioni)
 
-[31mNameError[39m: name 'U0' is not defined
+[31mTypeError[39m: 'int' object is not callable
 
