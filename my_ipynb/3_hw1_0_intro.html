@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Homework 1: Algebra Lineare &#8212; Metodi Numerici per l&#39;analisi dati - LAB</title>
+    <title>Homework 1: Algebra Lineare e fattorizzazioni &#8212; Metodi Numerici per l&#39;analisi dati - LAB</title>
   
   
   
@@ -173,7 +173,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_lab_python.html">Programmazione in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_lab_matplotlib.html">Grafica con Matplotlib</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Homework 1: Algebra Lineare</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Homework 1: Algebra Lineare e fattorizzazioni</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="3_hw1_1_svd.html">Esercizio 1) SVD per la classificazione</a></li>
 <li class="toctree-l2"><a class="reference internal" href="3_hw1_2_diadi.html">Esercizio 2) SVD per la compressione di immagini</a></li>
 <li class="toctree-l2"><a class="reference internal" href="3_hw1_3_lu.html">Esercizio 3) Risoluzione di sistemi lineari</a></li>
@@ -364,7 +364,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Homework 1: Algebra Lineare</h1>
+    <h1>Homework 1: Algebra Lineare e fattorizzazioni</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -376,7 +376,12 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-1-svd-per-la-classificazione">Esercizio 1) SVD per la classificazione</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-2-svd-per-la-compressione-di-diadi">Esercizio 2) SVD per la compressione di diadi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-3-fattorizzazione-lu-per-sistemi-lineari">Esercizio 3) Fattorizzazione LU per sistemi lineari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-3-risoluzione-di-sistemi-lineari">Esercizio 3) Risoluzione di sistemi lineari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">RECAP</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi-1-e-2">Esercizi 1 e 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-3">Esercizio 3</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -388,14 +393,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="homework-1-algebra-lineare">
-<h1>Homework 1: Algebra Lineare<a class="headerlink" href="#homework-1-algebra-lineare" title="Link to this heading">#</a></h1>
-<p><img alt="" src="../_images/imm_svd_color.png" />
-Nella decomposizione <span class="math notranslate nohighlight">\(A=U\Sigma V^T\)</span>, i vettori singolari associati ai valori singolari non nulli costituiscono basi ortonormali per:</p>
-<ul class="simple">
-<li><p>lo spazio delle colonne di <span class="math notranslate nohighlight">\(A\)</span>, attraverso le colonne di <span class="math notranslate nohighlight">\(U\)</span>;</p></li>
-<li><p>lo spazio delle righe di <span class="math notranslate nohighlight">\(A\)</span>, attraverso le colonne di <span class="math notranslate nohighlight">\(V\)</span>.</p></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="homework-1-algebra-lineare-e-fattorizzazioni">
+<h1>Homework 1: Algebra Lineare e fattorizzazioni<a class="headerlink" href="#homework-1-algebra-lineare-e-fattorizzazioni" title="Link to this heading">#</a></h1>
 <section id="esercizio-1-svd-per-la-classificazione">
 <h2>Esercizio 1) SVD per la classificazione<a class="headerlink" href="#esercizio-1-svd-per-la-classificazione" title="Link to this heading">#</a></h2>
 <p>Implementa il codice per classificare immagini di numeri, usando la SVD con basi di <span class="math notranslate nohighlight">\(k\)</span> vettori.</p>
@@ -422,8 +421,100 @@ Nella decomposizione <span class="math notranslate nohighlight">\(A=U\Sigma V^T\
 <li><p>Ripeti l’esercizio con altre immagini (ad esempio <code class="docutils literal notranslate"><span class="pre">data.coffee()</span></code> o <code class="docutils literal notranslate"><span class="pre">data.coins()</span></code>).</p></li>
 </ul>
 </section>
-<section id="esercizio-3-fattorizzazione-lu-per-sistemi-lineari">
-<h2>Esercizio 3) Fattorizzazione LU per sistemi lineari<a class="headerlink" href="#esercizio-3-fattorizzazione-lu-per-sistemi-lineari" title="Link to this heading">#</a></h2>
+<section id="esercizio-3-risoluzione-di-sistemi-lineari">
+<h2>Esercizio 3) Risoluzione di sistemi lineari<a class="headerlink" href="#esercizio-3-risoluzione-di-sistemi-lineari" title="Link to this heading">#</a></h2>
+<p>Considera le matrici</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A_1 = \begin{bmatrix}
+10 &amp;  2 &amp; -1 &amp;  1 &amp;  0 \\
+ 2 &amp;  9 &amp;  1 &amp; -2 &amp;  1 \\
+-1 &amp;  1 &amp;  7 &amp;  1 &amp; -1 \\
+ 1 &amp; -2 &amp;  1 &amp;  8 &amp;  2 \\
+ 0 &amp;  1 &amp; -1 &amp;  2 &amp;  6
+\end{bmatrix}, \ \ \ \ 
+A_2 = \begin{bmatrix} 1 &amp; 2 \\ 2 &amp; 1  \end{bmatrix} 
+\end{split}\]</div>
+<p>e <span class="math notranslate nohighlight">\(A_3\)</span> come matrice di Hilbert di dimensione n={2, 5, 15, 100}, poi:</p>
+<ul class="simple">
+<li><p>definisci il problema test <span class="math notranslate nohighlight">\(Ax=b\)</span> per ciascuna matrice, usando come soluzione esatta il vettore di 1 di opportuna lunghezza;</p></li>
+<li><p>calcola il numero di condizionamento di A con <code class="docutils literal notranslate"><span class="pre">np.linalg.cond</span></code>;</p></li>
+<li><p>calcola la fattorizzazione LU con pivoting e quella di Cholesky (se opportuno) tramite le funzioni <code class="docutils literal notranslate"><span class="pre">lu</span></code> e <code class="docutils literal notranslate"><span class="pre">cholesky</span></code> di <code class="docutils literal notranslate"><span class="pre">scipy.linalg</span></code>;</p></li>
+<li><p>calcola l’errore (in norma) di fattorizzazione per A;</p></li>
+<li><p>risolvi il sistema lineare con le funzioni <code class="docutils literal notranslate"><span class="pre">lu_factor</span></code> e <code class="docutils literal notranslate"><span class="pre">lu_solve</span> </code> di <code class="docutils literal notranslate"><span class="pre">scipy.linalg</span></code> e calcola l’errore relativo sulla soluzione;</p></li>
+<li><p>quando possibile, risolvi il sistema con la fattorizzazione di Cholesky tramite la funzione <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code>  e calcola l’errore relativo sulla soluzione.</p></li>
+</ul>
+</section>
+<section id="recap">
+<h2>RECAP<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<section id="esercizi-1-e-2">
+<h3>Esercizi 1 e 2<a class="headerlink" href="#esercizi-1-e-2" title="Link to this heading">#</a></h3>
+<p>Nella decomposizione <span class="math notranslate nohighlight">\(A=U\Sigma V^T\)</span>:
+<img alt="" src="../_images/imm_svd_color.png" />
+i vettori singolari associati ai valori singolari non nulli costituiscono basi ortonormali per:</p>
+<ul class="simple">
+<li><p>lo spazio delle colonne di <span class="math notranslate nohighlight">\(A\)</span>, attraverso le colonne di <span class="math notranslate nohighlight">\(U\)</span>;</p></li>
+<li><p>lo spazio delle righe di <span class="math notranslate nohighlight">\(A\)</span>, attraverso le colonne di <span class="math notranslate nohighlight">\(V\)</span>.</p></li>
+</ul>
+</section>
+<section id="esercizio-3">
+<h3>Esercizio 3<a class="headerlink" href="#esercizio-3" title="Link to this heading">#</a></h3>
+<p>Consideriamo ora un sistema lineare quadrato</p>
+<div class="math notranslate nohighlight">
+\[
+A\mathbf{x}=\mathbf{b},
+\qquad con \ 
+A\in\mathbb{R}^{n\times n},
+\quad\mathbf{x},\mathbf{b}\in\mathbb{R}^{n}.
+\]</div>
+<p>Il vettore <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> è noto, mentre <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> è il vettore delle incognite.</p>
+<p>Data la fattorizzazione <span class="math notranslate nohighlight">\(A=LU\)</span>:
+<img alt="" src="../_images/fattor_lu.png" /></p>
+<p>il sistema diventa</p>
+<div class="math notranslate nohighlight">
+\[
+LU\mathbf{x}=\mathbf{b}.
+\]</div>
+<p>Ponendo <span class="math notranslate nohighlight">\(\mathbf{y}=U\mathbf{x}\)</span>, risolviamo in successione</p>
+<div class="math notranslate nohighlight">
+\[ (1) \ \ 
+L\mathbf{y}=\mathbf{b},
+\]</div>
+<p>con sostituzione all’avanti, poi</p>
+<div class="math notranslate nohighlight">
+\[(2) \ \ 
+U\mathbf{x}=\mathbf{y}
+\]</div>
+<p>con sostituzione all’indietro.</p>
+<p>Data la fattorizzazione con pivoting <span class="math notranslate nohighlight">\(PA=LU\)</span>:
+<img alt="" src="../_images/fattor_P_LU.png" /></p>
+<p>il sistema diventa</p>
+<div class="math notranslate nohighlight">
+\[
+LU\mathbf{x}= PA\mathbf{x} = P\mathbf{b}.
+\]</div>
+<p>Ponendo <span class="math notranslate nohighlight">\(\mathbf{y}=U\mathbf{x}\)</span>, risolviamo in successione</p>
+<div class="math notranslate nohighlight">
+\[ (1)\ \ 
+L\mathbf{y}=P\mathbf{b},
+\qquad (2) \ \ 
+U\mathbf{x}=\mathbf{y}.
+\]</div>
+<p>Se <span class="math notranslate nohighlight">\(A\)</span> è una matrice simmetrica e definita positiva, data la fattorizzazione di Cholesky <span class="math notranslate nohighlight">\(A=LL^T\)</span>:
+<img alt="" src="../_images/fattor_chol.png" /></p>
+<p>il sistema diventa</p>
+<div class="math notranslate nohighlight">
+\[
+LL^T\mathbf{x}= \mathbf{b}.
+\]</div>
+<p>Ponendo <span class="math notranslate nohighlight">\(\mathbf{y}=L^T\mathbf{x}\)</span>, risolviamo in successione</p>
+<div class="math notranslate nohighlight">
+\[ (1)\ \ 
+L\mathbf{y}=\mathbf{b},
+\qquad (2) \ \ 
+L^T\mathbf{x}=\mathbf{y}.
+\]</div>
+</section>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -497,7 +588,12 @@ Nella decomposizione <span class="math notranslate nohighlight">\(A=U\Sigma V^T\
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-1-svd-per-la-classificazione">Esercizio 1) SVD per la classificazione</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-2-svd-per-la-compressione-di-diadi">Esercizio 2) SVD per la compressione di diadi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-3-fattorizzazione-lu-per-sistemi-lineari">Esercizio 3) Fattorizzazione LU per sistemi lineari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-3-risoluzione-di-sistemi-lineari">Esercizio 3) Risoluzione di sistemi lineari</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">RECAP</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi-1-e-2">Esercizi 1 e 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-3">Esercizio 3</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

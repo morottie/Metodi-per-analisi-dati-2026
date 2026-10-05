@@ -60,6 +60,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'my_ipynb/3_hw1_3_lu';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -171,7 +173,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_lab_python.html">Programmazione in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_lab_matplotlib.html">Grafica con Matplotlib</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="3_hw1_0_intro.html">Homework 1: Algebra Lineare</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="3_hw1_0_intro.html">Homework 1: Algebra Lineare e fattorizzazioni</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="3_hw1_1_svd.html">Esercizio 1) SVD per la classificazione</a></li>
 <li class="toctree-l2"><a class="reference internal" href="3_hw1_2_diadi.html">Esercizio 2) SVD per la compressione di immagini</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Esercizio 3) Risoluzione di sistemi lineari</a></li>
@@ -388,7 +390,219 @@
 <h1>Esercizio 3) Risoluzione di sistemi lineari<a class="headerlink" href="#esercizio-3-risoluzione-di-sistemi-lineari" title="Link to this heading">#</a></h1>
 <section id="consegna">
 <h2>Consegna:<a class="headerlink" href="#consegna" title="Link to this heading">#</a></h2>
-<p>…</p>
+<p>Considera le matrici</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A_1 = \begin{bmatrix}
+10 &amp;  2 &amp; -1 &amp;  1 &amp;  0 \\
+ 2 &amp;  9 &amp;  1 &amp; -2 &amp;  1 \\
+-1 &amp;  1 &amp;  7 &amp;  1 &amp; -1 \\
+ 1 &amp; -2 &amp;  1 &amp;  8 &amp;  2 \\
+ 0 &amp;  1 &amp; -1 &amp;  2 &amp;  6
+\end{bmatrix}, \ \ \ \ 
+A_2 = \begin{bmatrix} 1 &amp; 2 \\ 2 &amp; 1  \end{bmatrix} 
+\end{split}\]</div>
+<p>e <span class="math notranslate nohighlight">\(A_3\)</span> come matrice di Hilbert di dimensione n={2, 5, 15, 100}, poi:</p>
+<ul class="simple">
+<li><p>definisci il problema test <span class="math notranslate nohighlight">\(Ax=b\)</span> per ciascuna matrice, usando come soluzione esatta il vettore di 1 di opportuna lunghezza;</p></li>
+<li><p>calcola il numero di condizionamento di A con <code class="docutils literal notranslate"><span class="pre">np.linalg.cond</span></code>;</p></li>
+<li><p>calcola la fattorizzazione LU con pivoting e quella di Cholesky (se opportuno) tramite le funzioni <code class="docutils literal notranslate"><span class="pre">lu</span></code> e <code class="docutils literal notranslate"><span class="pre">cholesky</span></code> di <code class="docutils literal notranslate"><span class="pre">scipy.linalg</span></code>;</p></li>
+<li><p>calcola l’errore (in norma) di fattorizzazione per A;</p></li>
+<li><p>risolvi il sistema lineare con le funzioni <code class="docutils literal notranslate"><span class="pre">lu_factor</span></code> e <code class="docutils literal notranslate"><span class="pre">lu_solve</span> </code> di <code class="docutils literal notranslate"><span class="pre">scipy.linalg</span></code> e calcola l’errore relativo sulla soluzione;</p></li>
+<li><p>quando possibile, risolvi il sistema con la fattorizzazione di Cholesky tramite la funzione <code class="docutils literal notranslate"><span class="pre">np.linalg.solve</span></code>  e calcola l’errore relativo sulla soluzione.</p></li>
+</ul>
+<p>Definizione delle matrici</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Caso 1</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">A1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span> <span class="mi">2</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span>  <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span>  <span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">6</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="c1"># Caso 2</span>
+<span class="c1">#n=2</span>
+<span class="c1">#A2 = np.array([[1, 2],</span>
+<span class="c1">#              [2, 1]], dtype=float)</span>
+
+<span class="c1"># Caso 3</span>
+<span class="c1">#from scipy.linalg import hilbert</span>
+<span class="c1">#n = 15          # 2 oppure 5 oppure 100</span>
+<span class="c1">#A3 = hilbert(n)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Definizione del sistema lineare</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scelta della matrice</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">A1</span> <span class="c1"># A1 oppure A2 oppure A3</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A = </span><span class="si">{</span><span class="n">A</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Soluzione esatta </span>
+<span class="n">x_esatta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="c1"># Calcolo del termine noto</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x_esatta</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;b = </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A = [[10.  2. -1.  1.  0.]
+ [ 2.  9.  1. -2.  1.]
+ [-1.  1.  7.  1. -1.]
+ [ 1. -2.  1.  8.  2.]
+ [ 0.  1. -1.  2.  6.]]
+b = [12. 11.  7. 10.  8.]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.12531876645202
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calcolo le fattorizzazioni</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">lu</span><span class="p">,</span> <span class="n">cholesky</span>
+
+<span class="n">P</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">lu</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;L:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;U:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Errore fattorizzazione LU:&quot;</span><span class="p">,</span>
+      <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">P</span> <span class="o">@</span> <span class="n">L</span> <span class="o">@</span> <span class="n">U</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P:
+ [[1. 0. 0. 0. 0.]
+ [0. 1. 0. 0. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 0. 0. 1. 0.]
+ [0. 0. 0. 0. 1.]]
+L:
+ [[ 1.          0.          0.          0.          0.        ]
+ [ 0.2         1.          0.          0.          0.        ]
+ [-0.1         0.13953488  1.          0.          0.        ]
+ [ 0.1        -0.25581395  0.208981    1.          0.        ]
+ [ 0.          0.11627907 -0.16925734  0.35409514  1.        ]]
+U:
+ [[10.          2.         -1.          1.          0.        ]
+ [ 0.          8.6         1.2        -2.2         1.        ]
+ [ 0.          0.          6.73255814  1.40697674 -1.13953488]
+ [ 0.          0.          0.          7.04317789  2.49395509]
+ [ 0.          0.          0.          0.          4.8077489 ]]
+Errore fattorizzazione LU: 2.7194799110210365e-16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">cholesky</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Errore fattorizzazione Cholesky:&quot;</span><span class="p">,</span>
+      <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">C</span> <span class="o">@</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:
+ [[ 3.16227766  0.          0.          0.          0.        ]
+ [ 0.63245553  2.93257566  0.          0.          0.        ]
+ [-0.31622777  0.4091966   2.59471735  0.          0.        ]
+ [ 0.31622777 -0.75019377  0.54224663  2.65389862  0.        ]
+ [ 0.          0.34099717 -0.43917496  0.93973262  2.19265795]]
+Errore fattorizzazione Cholesky: 2.286089127109703e-15
+</pre></div>
+</div>
+</div>
+</div>
+<p>Risoluzione del sistema lineare tramite LU con pivoting</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Risoluzione mediante LU con pivoting</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">lu_factor</span><span class="p">,</span> <span class="n">lu_solve</span>
+
+<span class="n">lu</span><span class="p">,</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">lu_factor</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">x_lu</span> <span class="o">=</span> <span class="n">lu_solve</span><span class="p">((</span><span class="n">lu</span><span class="p">,</span> <span class="n">piv</span><span class="p">),</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Per la risoluzione con LU</span>
+<span class="n">errore_relativo_lu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x_lu</span> <span class="o">-</span> <span class="n">x_esatta</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x_esatta</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Termine noto b:&quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Soluzione esatta:&quot;</span><span class="p">,</span> <span class="n">x_esatta</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Soluzione calcolata:&quot;</span><span class="p">,</span> <span class="n">x_lu</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Errore relativo: </span><span class="si">{</span><span class="n">errore_relativo_lu</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Termine noto b: [12. 11.  7. 10.  8.]
+Soluzione esatta: [1. 1. 1. 1. 1.]
+Soluzione calcolata: [1. 1. 1. 1. 1.]
+Errore relativo: 1.986e-16
+</pre></div>
+</div>
+</div>
+</div>
+<p>Risoluzione del sistema lineare tramite Cholesky</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Risoluzione mediante Cholesky dei due sistemi: Ly = b e L.T x = y</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">x_chol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Per la risoluzione con Chol</span>
+<span class="n">errore_relativo_chol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x_chol</span> <span class="o">-</span> <span class="n">x_esatta</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x_esatta</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Termine noto b:&quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Termine di appoggio y:&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Soluzione esatta:&quot;</span><span class="p">,</span> <span class="n">x_esatta</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Soluzione calcolata:&quot;</span><span class="p">,</span> <span class="n">x_chol</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Errore relativo: </span><span class="si">{</span><span class="n">errore_relativo_chol</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Termine noto b: [12. 11.  7. 10.  8.]
+Termine di appoggio y: [3.79473319 2.93257566 2.69778903 3.59363124 2.19265795]
+Soluzione esatta: [1. 1. 1. 1. 1.]
+Soluzione calcolata: [1. 1. 1. 1. 1.]
+Errore relativo: 2.895e-16
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
