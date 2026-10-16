@@ -494,6 +494,7 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 <li><p>fai testing, poi analizza i residui e calcola le metriche di R-quadro e MSE.</p></li>
 </ul>
 <p>Ripeti la regressione multipla sul dataset dell’esercizio 2, per predire <code class="docutils literal notranslate"><span class="pre">Life_expectancy</span></code>.</p>
+<p><em>Opzionale:</em> ripeti la regressione multipla su un dataset a piacere.</p>
 </section>
 <section id="recap">
 <h2>RECAP<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
@@ -529,7 +530,7 @@ Inoltre, se <span class="math notranslate nohighlight">\(A\)</span> ha rango mas
 f(x) = \beta_0 + \beta_1 x + \beta_2 x^2 + \dots + \beta_d x^d = \sum_{k=0}^d \beta_k x^k.
 \]</div>
 <p>dove <span class="math notranslate nohighlight">\(d\)</span> (il grado del polinomio), viene scelto dall’utente.</p>
-<p><img alt="" src="my_ipynb/imm_regressLinearePolinomiale.png" /></p>
+<p><img alt="" src="../_images/imm_regressLinearePolinomiale.png" /></p>
 <p>Il nostro scopo è identificare i parametri <span class="math notranslate nohighlight">\(\beta_k\)</span> tali per cui <span class="math notranslate nohighlight">\(f(x_i)\)</span> approssimi <span class="math notranslate nohighlight">\(y_i\)</span> “al meglio”, ossia:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -567,7 +568,7 @@ A =  \begin{bmatrix} x_1^0 &amp; x_1^1 &amp; \dots &amp; x_1^d \\ x_2^0 &amp; x_
 y \approx \beta_0 + \beta_1x_1 + \beta_2x_2 + \cdots + \beta_px_p.
 \]</div>
 <p>Ogni coefficiente <span class="math notranslate nohighlight">\(c_j\)</span> descrive la variazione prevista di <span class="math notranslate nohighlight">\(y\)</span> quando <span class="math notranslate nohighlight">\(x_j\)</span> aumenta di un’unità, <strong>mantenendo costanti le altre variabili</strong>. I coefficienti si stimano con i <strong>minimi quadrati</strong>, costruendo una matrice con una colonna di 1 per l’intercetta e una colonna per ciascuna variabile esplicativa.</p>
-<p><img alt="" src="my_ipynb/imm_regressMultipla2.png" /></p>
+<p><img alt="" src="../_images/imm_regressMultipla2.png" /></p>
 </section>
 <section id="pandas-per-lavorare-sui-dati-reali">
 <h3>Pandas per lavorare sui dati reali<a class="headerlink" href="#pandas-per-lavorare-sui-dati-reali" title="Link to this heading">#</a></h3>
@@ -579,7 +580,7 @@ y \approx \beta_0 + \beta_1x_1 + \beta_2x_2 + \cdots + \beta_px_p.
 <p>Il <strong>DataFrame</strong> (df) è una tabella in cui le righe rappresentano le osservazioni e le colonne le variabili (aka proprietà, features).
 Colonne diverse possono contenere tipi di dati diversi (come numeri, testi o date).</p>
 <p>Un file di testo in formato <strong>CSV</strong> (<em>Comma-Separated Values</em>) memorizza dati tabellari: ogni riga corrisponde a un’osservazione e i valori sono separati da un delimitatore, generalmente una virgola (a volte da un punto e virgola). La prima riga può contenere i nomi delle features.</p>
-<p><img alt="" src="my_ipynb/imm_csv.jpg" /></p>
+<p><img alt="" src="../_images/imm_csv.jpg" /></p>
 <p>Comandi principali di pandas per lavorare sui df:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">pd.read_csv(&quot;dati.csv&quot;)</span></code>: carica un file CSV.</p></li>
