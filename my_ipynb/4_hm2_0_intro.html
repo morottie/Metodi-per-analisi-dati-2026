@@ -1,0 +1,730 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Homework 2: Regressione con Minimi Quadrati (algebra lineare) &#8212; Metodi Numerici per l&#39;analisi dati - LAB</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'my_ipynb/4_hm2_0_intro';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Esercizio 1) LS su dati sintetici" href="4_hw2_1_LS_datiSintetici_COMPLETO.html" />
+    <link rel="prev" title="Esercizio 3) Risoluzione di sistemi lineari" href="3_hw1_3_lu.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_disi.jpg" class="logo__image only-light" alt="Metodi Numerici per l'analisi dati - LAB - Home"/>
+    <img src="../_static/logo_disi.jpg" class="logo__image only-dark pst-js-only" alt="Metodi Numerici per l'analisi dati - LAB - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Laboratorio di Metodi Numerici per l’analisi dati
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_lab_python.html">Programmazione in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_lab_matplotlib.html">Grafica con Matplotlib</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="3_hw1_0_intro.html">Homework 1: Algebra Lineare e fattorizzazioni</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="3_hw1_1_svd.html">Esercizio 1) SVD per la classificazione</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_hw1_2_diadi.html">Esercizio 2) SVD per la compressione di immagini</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_hw1_3_lu.html">Esercizio 3) Risoluzione di sistemi lineari</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Homework 2: Regressione con Minimi Quadrati (algebra lineare)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="4_hw2_1_LS_datiSintetici_COMPLETO.html">Esercizio 1) LS su dati sintetici</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_hw2_2_LS_datiReali_COMPLETO.html">Esercizio 2) LS su dati reali</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_hw2_3_regrMultipla_COMPLETO.html">Esercizio 3) Regressione multipla</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="5_hm3.html">Homework 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_hm4.html">Homework 4</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/morottie/Metodi-per-analisi-dati-2026.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/morottie/Metodi-per-analisi-dati-2026.git/issues/new?title=Issue%20on%20page%20%2Fmy_ipynb/4_hm2_0_intro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/my_ipynb/4_hm2_0_intro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Homework 2: Regressione con Minimi Quadrati (algebra lineare)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-1-ls-su-dati-sintetici">Esercizio 1) LS su dati sintetici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-2-ls-su-dati-reali">Esercizio 2) LS su dati reali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-3-regressione-multipla">Esercizio 3) Regressione multipla</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">RECAP</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equazioni-normali-e-minimi-quadrati">Equazioni normali e minimi quadrati</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-con-i-minimi-quadrati-ls-least-squares">Regressione con i Minimi Quadrati (LS - Least Squares)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-multipla">Regressione multipla</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-per-lavorare-sui-dati-reali">Pandas per lavorare sui dati reali</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="homework-2-regressione-con-minimi-quadrati-algebra-lineare">
+<h1>Homework 2: Regressione con Minimi Quadrati (algebra lineare)<a class="headerlink" href="#homework-2-regressione-con-minimi-quadrati-algebra-lineare" title="Link to this heading">#</a></h1>
+<section id="esercizio-1-ls-su-dati-sintetici">
+<h2>Esercizio 1) LS su dati sintetici<a class="headerlink" href="#esercizio-1-ls-su-dati-sintetici" title="Link to this heading">#</a></h2>
+<p>Considera le 6 coppie di dati <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> che rappresentano 6 città in termini di:</p>
+<ul class="simple">
+<li><p>x : Indice della Qualità della Vita, con valori fra 0 e 100;</p></li>
+<li><p>y : Costo Medio di un affitto mensile, con valori non negativi.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>i</p></th>
+<th class="head"><p>x</p></th>
+<th class="head"><p>y</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>60</p></td>
+<td><p>921.82</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>65</p></td>
+<td><p>947.36</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>70</p></td>
+<td><p>999.86</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>75</p></td>
+<td><p>1050.30</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>80</p></td>
+<td><p>1121.71</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>85</p></td>
+<td><p>1329.49</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Calcola il modello di regressione (lineare semplice o polinomiale) che meglio descrive i dati forniti.
+In particolare:</p>
+<ul class="simple">
+<li><p>visualizza i punti con lo scatterplot;</p></li>
+<li><p>fissa il grado del modello lineare e costruisci la matrice di Vandermonde opportuna;</p></li>
+<li><p>risolvi la regressione tramite i minimi quadrati implementati da <code class="docutils literal notranslate"><span class="pre">np.linalg.lstsq</span></code>, provando modelli di grado 0, 1, 2 e 3;</p></li>
+<li><p>visualizza il polinomio di regressione ottenuto;</p></li>
+<li><p>analizza e confronta i residui al variare del grado di approssimazione;</p></li>
+<li><p>osserva la <em>capacità di generalizzazione</em> dei modelli ottenuti, sull’intero dominio <span class="math notranslate nohighlight">\( x \in [0, 100]\)</span>;</p></li>
+<li><p>guarda quanto cambiano i risultati (valori di beta ottimali e predizioni) risolvendo il problema dei minimi quadrati con Cholesky (funzione <code class="docutils literal notranslate"><span class="pre">np.linalg.cholesky</span></code>)</p></li>
+<li><p>guarda quanto cambiano i risultati (valori di beta ottimali e predizioni) risolvendo il problema dei minimi quadrati con la SVD e la sua specifica riformulazione con la pseudoinversa di Moore–Penrose.</p></li>
+</ul>
+</section>
+<section id="esercizio-2-ls-su-dati-reali">
+<h2>Esercizio 2) LS su dati reali<a class="headerlink" href="#esercizio-2-ls-su-dati-reali" title="Link to this heading">#</a></h2>
+<p>Leggi i dati contenuti nel file <code class="docutils literal notranslate"><span class="pre">Life_Expectancy_Data_Updated.csv</span></code> e salvali in un dataframe.
+Considera la colonna <code class="docutils literal notranslate"><span class="pre">Life_expectancy</span></code> e una seconda variabile numerica a scelta (possibilmente che correli con la prima).
+Calcola un buon modello di regressione per predire <code class="docutils literal notranslate"><span class="pre">Life_expectancy</span></code> (feature dipendente, <code class="docutils literal notranslate"><span class="pre">y</span></code>) a partire da un’altra variabile del dataset (feature indipendente, <code class="docutils literal notranslate"><span class="pre">x</span></code>).</p>
+<p>In particolare:</p>
+<ul class="simple">
+<li><p>importa i dati dal file con la funzione di <code class="docutils literal notranslate"><span class="pre">pandas</span></code>;</p></li>
+<li><p>guarda alle dimensioni del dataset e alle sue prime righe;</p></li>
+<li><p>scarta le variabili non numeriche con <code class="docutils literal notranslate"><span class="pre">drop()</span></code>;</p></li>
+<li><p>utilizzando la funzione <code class="docutils literal notranslate"><span class="pre">scatter_matrix</span></code> di <code class="docutils literal notranslate"><span class="pre">pandas.plotting</span></code>, guarda se e come correlano le variabili del dataset fra loro e individua di conseguenza una buona feature <code class="docutils literal notranslate"><span class="pre">x</span></code>:</p></li>
+<li><p>estrai dal dataframe i dati per la regressione (variabile indipendente <code class="docutils literal notranslate"><span class="pre">x</span></code> e variabile dipendente <code class="docutils literal notranslate"><span class="pre">y</span></code>), poi visualizza i punti (x,y) con lo scatterplot.</p></li>
+</ul>
+<p>Ora:</p>
+<ul class="simple">
+<li><p>separa i punti per train e test;</p></li>
+<li><p>fissa il grado del modello di regressione e costruisci la matrice di Vandermonde opportuna a partire dai punti di <em>training</em>;</p></li>
+<li><p>risolvi la regressione tramite i minimi quadrati implementati da <code class="docutils literal notranslate"><span class="pre">np.linalg.lstsq</span></code>, provando modelli di grado 1, 2 e 3;</p></li>
+<li><p>visualizza il modello di regressione sull’intero dominio <span class="math notranslate nohighlight">\( x \in [0, 150]\)</span>, insieme ai punti di training;</p></li>
+<li><p>calcola le predizioni per i punti di <em>testing</em> e visualizza il modello di regressione coi punti di testing;</p></li>
+<li><p>analizza i residui e calcola le metriche di R-quadro e MSE.</p></li>
+</ul>
+<p>Ripeti la regressione provando una altra feature <code class="docutils literal notranslate"><span class="pre">x</span></code> come variabile indipendente.</p>
+</section>
+<section id="esercizio-3-regressione-multipla">
+<h2>Esercizio 3) Regressione multipla<a class="headerlink" href="#esercizio-3-regressione-multipla" title="Link to this heading">#</a></h2>
+<p>A partire dal dataset contenuto nel file <code class="docutils literal notranslate"><span class="pre">housing1.csv</span></code>, analizza i dati del dataframe e crea il modello di regressione lineare <em>multipla</em> per predire il prezzo delle case (feature <code class="docutils literal notranslate"><span class="pre">median_house_value</span></code>).</p>
+<p>In particolare:</p>
+<ul class="simple">
+<li><p>importa i dati dal file con la funzione di <code class="docutils literal notranslate"><span class="pre">pandas</span></code>;</p></li>
+<li><p>guarda alle dimensioni del dataset e alle sue prime righe;</p></li>
+<li><p>utilizzando la funzione <code class="docutils literal notranslate"><span class="pre">scatter_matrix</span></code> di <code class="docutils literal notranslate"><span class="pre">pandas.plotting</span></code>, guarda se e come correlano le variabili del dataset fra loro;</p></li>
+<li><p>dividi i dati per la regressione fra variavili indipendenti (variabile <code class="docutils literal notranslate"><span class="pre">X</span></code>) e variabile dipendente (variabile <code class="docutils literal notranslate"><span class="pre">y</span></code>), poi separa i dati per train e test;</p></li>
+<li><p>sfruttando la funzione <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> di <code class="docutils literal notranslate"><span class="pre">sklearn.linear_model</span></code>, calcola la regressione multipla sul train set e analizza i coefficienti calcolati: <em>quali features fanno aumentare il prezzo medio delle case? Quali abbassano il costo e quali non incidono sul prezzo?</em></p></li>
+<li><p>fai testing, poi analizza i residui e calcola le metriche di R-quadro e MSE.</p></li>
+</ul>
+<p>Ripeti la regressione multipla sul dataset dell’esercizio 2, per predire <code class="docutils literal notranslate"><span class="pre">Life_expectancy</span></code>.</p>
+</section>
+<section id="recap">
+<h2>RECAP<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<section id="equazioni-normali-e-minimi-quadrati">
+<h3>Equazioni normali e minimi quadrati<a class="headerlink" href="#equazioni-normali-e-minimi-quadrati" title="Link to this heading">#</a></h3>
+<p>Consideriamo un sistema lineare <span class="math notranslate nohighlight">\( Ax=b \)</span> dove <span class="math notranslate nohighlight">\(A\)</span> non è necessariamente una matrice quadrata e dove i valori di <span class="math notranslate nohighlight">\(b\)</span> possono essere inesatti. In generale, non esiste un vettore <span class="math notranslate nohighlight">\(x\)</span> che soddisfi esattamente tutte le equazioni del sistema, ma possiamo trovare il vettore <span class="math notranslate nohighlight">\(x\)</span> per cui <span class="math notranslate nohighlight">\(Ax\)</span> è il più vicino possibile a <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<p>Definendo il vettore dei residui <span class="math notranslate nohighlight">\(r(x)=b-Ax\)</span> come il vettore degli errori punto a punto, vogliamo allora che il residuo sia minore possibile e consideriamo il miglior <span class="math notranslate nohighlight">\(x\)</span> come il vettore che minimizza la <strong>somma dei quadrati degli errori</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\boxed{x^*=\operatorname*{argmin}_{x}
+\|b-Ax\|_2^2}.
+\]</div>
+<p>Se <span class="math notranslate nohighlight">\(x^*\)</span> è la “miglior” soluzione del sistema, chiamiamo <span class="math notranslate nohighlight">\(r^*=b-Ax^*\)</span> il corrispondente residuo. Risulta (vedere la teoria) che <span class="math notranslate nohighlight">\(r\)</span> è un vettore ortogonale a tutte le colonne di <span class="math notranslate nohighlight">\(A\)</span>, cioè:</p>
+<div class="math notranslate nohighlight">
+\[
+A^Tr^*=0 \quad\Longleftrightarrow\quad
+A^T(b-Ax^*)=0
+\]</div>
+<p>Ricaviamo allora il <strong>sistema delle equazioni normali</strong></p>
+<div class="math notranslate nohighlight">
+\[ \boxed{
+A^TAx^*=A^Tb}.
+\]</div>
+<p>Poiché <span class="math notranslate nohighlight">\(A^TA\)</span> è simmetrica definita positiva, il sistema può essere risolto in maniera effciente con la fattorizzazione di Cholesky.
+Inoltre, se <span class="math notranslate nohighlight">\(A\)</span> ha rango massimo per colonne, allora <span class="math notranslate nohighlight">\(A^TA\)</span> è anche invertibile (quindi le equazioni normali hanno un’unica soluzione).</p>
+</section>
+<section id="regressione-con-i-minimi-quadrati-ls-least-squares">
+<h3>Regressione con i Minimi Quadrati (LS - Least Squares)<a class="headerlink" href="#regressione-con-i-minimi-quadrati-ls-least-squares" title="Link to this heading">#</a></h3>
+<p>Abbiamo <span class="math notranslate nohighlight">\(n\)</span> osservazioni del tipo <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> con <span class="math notranslate nohighlight">\(i = 1, \dots n\)</span> e ci serve trovare il modello <span class="math notranslate nohighlight">\(f(x)\)</span> tale per cui <span class="math notranslate nohighlight">\(y=f(x)\)</span>. Ciò significa che <span class="math notranslate nohighlight">\(f\)</span> ci permette di predire <span class="math notranslate nohighlight">\(y\)</span> (variabile dipendente) a partire dalla conoscenza della <span class="math notranslate nohighlight">\(x\)</span> (variabile indipendente).</p>
+<p>Siamo ora interessati a modelli lineari di approssimazione <strong>polinomiale</strong>, in cui cioè la funzione <span class="math notranslate nohighlight">\(f(x)\)</span> si assume essere un polinomio nella variabile <span class="math notranslate nohighlight">\(x\)</span> di grado <span class="math notranslate nohighlight">\(d\)</span>, ovvero:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \beta_0 + \beta_1 x + \beta_2 x^2 + \dots + \beta_d x^d = \sum_{k=0}^d \beta_k x^k.
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(d\)</span> (il grado del polinomio), viene scelto dall’utente.</p>
+<p><img alt="" src="my_ipynb/imm_regressLinearePolinomiale.png" /></p>
+<p>Il nostro scopo è identificare i parametri <span class="math notranslate nohighlight">\(\beta_k\)</span> tali per cui <span class="math notranslate nohighlight">\(f(x_i)\)</span> approssimi <span class="math notranslate nohighlight">\(y_i\)</span> “al meglio”, ossia:</p>
+<div class="math notranslate nohighlight">
+\[
+y_i \approx f(x_i) = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \dots + \beta_d x_i^d = \sum_{k=0}^d \beta_k x_i^k.\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Approssimare “al meglio” per noi significa minimizzare l’errore quadratico medio di predizione del modello <span class="math notranslate nohighlight">\(f\)</span>, ossia:</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{\beta} \sum_{i=1}^n (\beta^T x_i^{(d)} - y_i)^2.
+\]</div>
+</div>
+<p>Definiamo:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\beta = [\beta_0, \beta_1, \dots, y_d]\)</span> il vettore dei coefficienti del polinomio <span class="math notranslate nohighlight">\(f(x)\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(y = [y_1, \dots, y_n]\)</span> il vettore che ha per elementi i dati noti;</p></li>
+<li><p><span class="math notranslate nohighlight">\(A\)</span> la matrice (spesso chiamata <strong>matrice di Vandermonde</strong> di grado <span class="math notranslate nohighlight">\(d\)</span>) che ha per righe le potenze di ciascun punto <span class="math notranslate nohighlight">\(\{ x_1, x_2, \dots, x_n \}\)</span>, ossia:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A =  \begin{bmatrix} x_1^0 &amp; x_1^1 &amp; \dots &amp; x_1^d \\ x_2^0 &amp; x_2^1 &amp; \dots &amp; x_2^d \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ x_n^0 &amp; x_n^1 &amp; \dots &amp; x_n^d  \end{bmatrix} \in \mathbb{R}^{n \times (d+1)},
+\end{split}\]</div>
+<p>Ora il problema di regressione è equivalente a:</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{\beta} || A\beta - y ||_2^2,
+\]</div>
+<p>che rappresenta numericamente un problema ai minimi quadrati, presentato sopra.</p>
+</section>
+<section id="regressione-multipla">
+<h3>Regressione multipla<a class="headerlink" href="#regressione-multipla" title="Link to this heading">#</a></h3>
+<p>La <strong>regressione lineare multipla</strong> estende quella semplice utilizzando più variabili esplicative per prevedere una variabile risposta:</p>
+<div class="math notranslate nohighlight">
+\[
+y \approx \beta_0 + \beta_1x_1 + \beta_2x_2 + \cdots + \beta_px_p.
+\]</div>
+<p>Ogni coefficiente <span class="math notranslate nohighlight">\(c_j\)</span> descrive la variazione prevista di <span class="math notranslate nohighlight">\(y\)</span> quando <span class="math notranslate nohighlight">\(x_j\)</span> aumenta di un’unità, <strong>mantenendo costanti le altre variabili</strong>. I coefficienti si stimano con i <strong>minimi quadrati</strong>, costruendo una matrice con una colonna di 1 per l’intercetta e una colonna per ciascuna variabile esplicativa.</p>
+<p><img alt="" src="my_ipynb/imm_regressMultipla2.png" /></p>
+</section>
+<section id="pandas-per-lavorare-sui-dati-reali">
+<h3>Pandas per lavorare sui dati reali<a class="headerlink" href="#pandas-per-lavorare-sui-dati-reali" title="Link to this heading">#</a></h3>
+<p><strong>Pandas</strong> è una libreria Python per caricare, organizzare e analizzare dati:</p>
+<ul class="simple">
+<li><p>si installa con <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">pandas</span></code></p></li>
+<li><p>si importa con <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pandas</span> <span class="pre">as</span> <span class="pre">pd</span></code>.</p></li>
+</ul>
+<p>Il <strong>DataFrame</strong> (df) è una tabella in cui le righe rappresentano le osservazioni e le colonne le variabili (aka proprietà, features).
+Colonne diverse possono contenere tipi di dati diversi (come numeri, testi o date).</p>
+<p>Un file di testo in formato <strong>CSV</strong> (<em>Comma-Separated Values</em>) memorizza dati tabellari: ogni riga corrisponde a un’osservazione e i valori sono separati da un delimitatore, generalmente una virgola (a volte da un punto e virgola). La prima riga può contenere i nomi delle features.</p>
+<p><img alt="" src="my_ipynb/imm_csv.jpg" /></p>
+<p>Comandi principali di pandas per lavorare sui df:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">=</span> <span class="pre">pd.read_csv(&quot;dati.csv&quot;)</span></code>: carica un file CSV.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.head()</span></code>: mostra le prime righe.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.info()</span></code>: riassume colonne, tipi e valori non nulli.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.describe()</span></code>: mostra statistiche descrittive delle colonne numeriche.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df[&quot;nome&quot;]</span></code>: seleziona una colonna.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df[[&quot;nome1&quot;,</span> <span class="pre">&quot;nome2&quot;]].copy()</span></code>: crea una copia indipendente delle colonne scelte.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df[df[&quot;eta&quot;]</span> <span class="pre">&gt;</span> <span class="pre">18].copy()</span></code>: seleziona e copia le righe che soddisfano una condizione.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.isna().sum()</span></code>: conta i valori mancanti per colonna.</p></li>
+</ul>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./my_ipynb"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3_hw1_3_lu.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Esercizio 3) Risoluzione di sistemi lineari</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="4_hw2_1_LS_datiSintetici_COMPLETO.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Esercizio 1) LS su dati sintetici</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-1-ls-su-dati-sintetici">Esercizio 1) LS su dati sintetici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-2-ls-su-dati-reali">Esercizio 2) LS su dati reali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-3-regressione-multipla">Esercizio 3) Regressione multipla</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">RECAP</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equazioni-normali-e-minimi-quadrati">Equazioni normali e minimi quadrati</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-con-i-minimi-quadrati-ls-least-squares">Regressione con i Minimi Quadrati (LS - Least Squares)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regressione-multipla">Regressione multipla</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-per-lavorare-sui-dati-reali">Pandas per lavorare sui dati reali</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Elena Morotti
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
