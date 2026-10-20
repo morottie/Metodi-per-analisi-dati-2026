@@ -424,7 +424,7 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 <ul class="simple">
 <li><p>separa i punti per train e test;</p></li>
 <li><p>fissa il grado del modello di regressione e costruisci la matrice di Vandermonde opportuna a partire dai punti di <em>training</em>;</p></li>
-<li><p>risolvi la regressione tramite i minimi quadrati implementati da <code class="docutils literal notranslate"><span class="pre">np.linalg.lstsq</span></code>, provando modelli di grado 1, 2 e 3;</p></li>
+<li><p>risolvi la regressione tramite i minimi quadrati implementati da <code class="docutils literal notranslate"><span class="pre">np.linalg.lstsq</span></code>, provando modelli di grado 1, 2, 3 e 8;</p></li>
 <li><p>visualizza il modello di regressione sull’intero dominio <span class="math notranslate nohighlight">\( x \in [0, 150]\)</span>, insieme ai punti di training;</p></li>
 <li><p>calcola le predizioni per i punti di <em>testing</em> e visualizza il modello di regressione coi punti di testing;</p></li>
 <li><p>analizza i residui e calcola le metriche di R-quadro e MSE.</p></li>
@@ -451,68 +451,7 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Life_Expectancy_Data_Updated.csv&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
-
-<span class="nn">File ~\anaconda3\envs\libro\Lib\site-packages\pandas\io\parsers\readers.py:872,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, skip_blank_lines, parse_dates, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
-<span class="g g-Whitespace">    </span><span class="mi">860</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">861</span>     <span class="n">dialect</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">862</span>     <span class="n">delimiter</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>    <span class="mi">868</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">869</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">870</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">872</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
-
-<span class="nn">File ~\anaconda3\envs\libro\Lib\site-packages\pandas\io\parsers\readers.py:300,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">297</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">299</span> <span class="c1"># Create the parser.</span>
-<span class="ne">--&gt; </span><span class="mi">300</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">302</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">303</span>     <span class="k">return</span> <span class="n">parser</span>
-
-<span class="nn">File ~\anaconda3\envs\libro\Lib\site-packages\pandas\io\parsers\readers.py:1643,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1640</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1642</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">-&gt; </span><span class="mi">1643</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
-
-<span class="nn">File ~\anaconda3\envs\libro\Lib\site-packages\pandas\io\parsers\readers.py:1907,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1905</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1906</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1907</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1908</span>     <span class="n">f</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1909</span>     <span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1910</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1911</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1912</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1913</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1914</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1915</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1916</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1917</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-<span class="g g-Whitespace">   </span><span class="mi">1918</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
-
-<span class="nn">File ~\anaconda3\envs\libro\Lib\site-packages\pandas\io\common.py:930,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">925</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">926</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
-<span class="g g-Whitespace">    </span><span class="mi">927</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
-<span class="g g-Whitespace">    </span><span class="mi">928</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">929</span>         <span class="c1"># Encoding</span>
-<span class="ne">--&gt; </span><span class="mi">930</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">931</span>             <span class="n">handle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">932</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">933</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">934</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">935</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">936</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">937</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">938</span>         <span class="c1"># Binary mode</span>
-<span class="g g-Whitespace">    </span><span class="mi">939</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;Life_Expectancy_Data_Updated.csv&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.DataFrame&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -520,6 +459,11 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2864, 21)
 </pre></div>
 </div>
 </div>
@@ -531,10 +475,83 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prime righe del dataframe:
+   Country          Region  Year  Infant_deaths  Under_five_deaths  \
+0  Turkiye     Middle East  2015           11.1               13.0   
+1    Spain  European Union  2015            2.7                3.3   
+2    India            Asia  2007           51.5               67.9   
+3   Guyana   South America  2006           32.8               40.5   
+4   Israel     Middle East  2012            3.4                4.3   
+
+   Adult_mortality  Alcohol_consumption  Hepatitis_B  Measles   BMI  ...  \
+0         105.8240                 1.32           97       65  27.8  ...   
+1          57.9025                10.35           97       94  26.0  ...   
+2         201.0765                 1.57           60       35  21.2  ...   
+3         222.1965                 5.68           93       74  25.3  ...   
+4          57.9510                 2.89           97       89  27.0  ...   
+
+   Diphtheria  Incidents_HIV  GDP_per_capita  Population_mln  \
+0          97           0.08           11006           78.53   
+1          97           0.09           25742           46.44   
+2          64           0.13            1076         1183.21   
+3          93           0.79            4146            0.75   
+4          94           0.08           33995            7.91   
+
+   Thinness_ten_nineteen_years  Thinness_five_nine_years  Schooling  \
+0                          4.9                       4.8        7.8   
+1                          0.6                       0.5        9.7   
+2                         27.1                      28.0        5.0   
+3                          5.7                       5.5        7.9   
+4                          1.2                       1.1       12.8   
+
+   Economy_status_Developed  Economy_status_Developing  Life_expectancy  
+0                         0                          1             76.5  
+1                         1                          0             82.8  
+2                         0                          1             65.4  
+3                         0                          1             67.0  
+4                         1                          0             81.7  
+
+[5 rows x 21 columns]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>  <span class="c1"># per vededre Non-Null Count e Tipi di dato</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.DataFrame&#39;&gt;
+RangeIndex: 2864 entries, 0 to 2863
+Data columns (total 21 columns):
+ #   Column                       Non-Null Count  Dtype  
+---  ------                       --------------  -----  
+ 0   Country                      2864 non-null   str    
+ 1   Region                       2864 non-null   str    
+ 2   Year                         2864 non-null   int64  
+ 3   Infant_deaths                2864 non-null   float64
+ 4   Under_five_deaths            2864 non-null   float64
+ 5   Adult_mortality              2864 non-null   float64
+ 6   Alcohol_consumption          2864 non-null   float64
+ 7   Hepatitis_B                  2864 non-null   int64  
+ 8   Measles                      2864 non-null   int64  
+ 9   BMI                          2864 non-null   float64
+ 10  Polio                        2864 non-null   int64  
+ 11  Diphtheria                   2864 non-null   int64  
+ 12  Incidents_HIV                2864 non-null   float64
+ 13  GDP_per_capita               2864 non-null   int64  
+ 14  Population_mln               2864 non-null   float64
+ 15  Thinness_ten_nineteen_years  2864 non-null   float64
+ 16  Thinness_five_nine_years     2864 non-null   float64
+ 17  Schooling                    2864 non-null   float64
+ 18  Economy_status_Developed     2864 non-null   int64  
+ 19  Economy_status_Developing    2864 non-null   int64  
+ 20  Life_expectancy              2864 non-null   float64
+dtypes: float64(11), int64(8), str(2)
+memory usage: 470.0 KB
 </pre></div>
 </div>
 </div>
@@ -555,6 +572,36 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.DataFrame&#39;&gt;
+RangeIndex: 2864 entries, 0 to 2863
+Data columns (total 19 columns):
+ #   Column                       Non-Null Count  Dtype  
+---  ------                       --------------  -----  
+ 0   Year                         2864 non-null   int64  
+ 1   Infant_deaths                2864 non-null   float64
+ 2   Under_five_deaths            2864 non-null   float64
+ 3   Adult_mortality              2864 non-null   float64
+ 4   Alcohol_consumption          2864 non-null   float64
+ 5   Hepatitis_B                  2864 non-null   int64  
+ 6   Measles                      2864 non-null   int64  
+ 7   BMI                          2864 non-null   float64
+ 8   Polio                        2864 non-null   int64  
+ 9   Diphtheria                   2864 non-null   int64  
+ 10  Incidents_HIV                2864 non-null   float64
+ 11  GDP_per_capita               2864 non-null   int64  
+ 12  Population_mln               2864 non-null   float64
+ 13  Thinness_ten_nineteen_years  2864 non-null   float64
+ 14  Thinness_five_nine_years     2864 non-null   float64
+ 15  Schooling                    2864 non-null   float64
+ 16  Economy_status_Developed     2864 non-null   int64  
+ 17  Economy_status_Developing    2864 non-null   int64  
+ 18  Life_expectancy              2864 non-null   float64
+dtypes: float64(11), int64(8)
+memory usage: 425.3 KB
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="analisi-delle-variabili-disponibili-e-visualizzazioni">
@@ -571,6 +618,9 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/96380ffb42b786c9b99e98763c3a430e94c024a26fcb001c9e063ed3cbbe19dd.png" src="../_images/96380ffb42b786c9b99e98763c3a430e94c024a26fcb001c9e063ed3cbbe19dd.png" />
+</div>
 </div>
 </section>
 <section id="la-variabile-dipendente-da-predire">
@@ -578,6 +628,26 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Life_expectancy&quot;</span><span class="p">][:</span><span class="mi">15</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     76.5
+1     82.8
+2     65.4
+3     67.0
+4     81.7
+5     78.2
+6     71.2
+7     71.2
+8     71.9
+9     68.7
+10    74.2
+11    79.8
+12    72.3
+13    68.3
+14    81.5
+Name: Life_expectancy, dtype: float64
 </pre></div>
 </div>
 </div>
@@ -592,6 +662,9 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/0e56017549e23d56905d7717c5967faefc66bd0305c137639f1d0bc748076e64.png" src="../_images/0e56017549e23d56905d7717c5967faefc66bd0305c137639f1d0bc748076e64.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -602,6 +675,9 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/906eeb2a76c0332fa606bfddcef16fda055c9df44242ea03989a348adcc7bf25.png" src="../_images/906eeb2a76c0332fa606bfddcef16fda055c9df44242ea03989a348adcc7bf25.png" />
 </div>
 </div>
 </section>
@@ -616,6 +692,9 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/42952a85c97ab407fb3a006aef5138818a91158739152273ee6dd03bf8c5dea7.png" src="../_images/42952a85c97ab407fb3a006aef5138818a91158739152273ee6dd03bf8c5dea7.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -624,6 +703,12 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 <span class="n">DF</span><span class="p">[</span><span class="s2">&quot;Infant_deaths&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../_images/01dc2fd51fc5f32d62c4a3a66f7439f0340df8d2c2dd6b817972eea389f39052.png" src="../_images/01dc2fd51fc5f32d62c4a3a66f7439f0340df8d2c2dd6b817972eea389f39052.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -639,6 +724,9 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/31b9288a40b7ce515e2f384c86ba694860fbfc5c7b6931219cba6b506ad021c3.png" src="../_images/31b9288a40b7ce515e2f384c86ba694860fbfc5c7b6931219cba6b506ad021c3.png" />
 </div>
 </div>
 </section>
@@ -661,12 +749,18 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2291,)
+(573,)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Creazione della matrice del sistema</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Grado del polinomio</span>
-<span class="n">grado</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">grado</span> <span class="o">=</span> <span class="mi">8</span>
 
 <span class="c1"># Matrice del modello</span>
 <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
@@ -679,12 +773,22 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2291, 9)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Risoluzione con LSTSQ</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta_star</span><span class="p">,</span> <span class="n">residui</span><span class="p">,</span> <span class="n">rango</span><span class="p">,</span> <span class="n">valori_singolari</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Soluzione LSQ:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">beta_star</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Soluzione LSQ: [ 0.      0.      0.      0.      0.0002 -0.      0.     -0.      0.    ]
 </pre></div>
 </div>
 </div>
@@ -707,6 +811,13 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>beta0 = 0.0000
+beta1 = 0.0000
+beta2 = 0.0000
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -722,6 +833,9 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e1bed11b01c46c4971c1dfa08afa6b7a56967048b8ad97cb8d0db4935c7913ae.png" src="../_images/e1bed11b01c46c4971c1dfa08afa6b7a56967048b8ad97cb8d0db4935c7913ae.png" />
 </div>
 </div>
 </section>
@@ -740,6 +854,11 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(573, 9)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -751,7 +870,7 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 <p>Metodo alternativo: implemento la formula del modello</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># m = len(x_test)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
 <span class="n">y_pred2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">m</span><span class="p">):</span>
@@ -761,6 +880,14 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 
 <span class="nb">print</span><span class="p">(</span><span class="n">y_test</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">y_pred2</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[72.  81.3 62.7 55.4 79.  82.1 81.4 61.1 69.8 81.4]
+[5.16155078e+00 4.59790905e-02 8.41713320e+01 3.66750069e+01
+ 6.67067481e-02 2.42447713e-02 1.90631735e-02 5.65607923e+01
+ 4.15344503e+00 6.01592880e-03]
 </pre></div>
 </div>
 </div>
@@ -795,7 +922,12 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">r2_score</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R-squared:&quot;</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R-squared:&quot;</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R-squared: -39.01437372285678
 </pre></div>
 </div>
 </div>
@@ -813,7 +945,12 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_squared_error</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean Squared Error:&quot;</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean Squared Error:&quot;</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 3320.841045483087
 </pre></div>
 </div>
 </div>
@@ -821,6 +958,16 @@ Calcola un buon modello di regressione per predire <code class="docutils literal
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Somma(residui)**2 / n_test:</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span><span class="o">/</span> <span class="n">y_test</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">28</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Somma(residui)**2 / n_test:</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span><span class="o">/</span> <span class="n">y_test</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;r&#39; is not defined
 </pre></div>
 </div>
 </div>
