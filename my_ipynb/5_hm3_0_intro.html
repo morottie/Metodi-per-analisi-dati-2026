@@ -1,0 +1,1006 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Homework 3: Risoluzione di equazioni non lineari e Ottimizzazione &#8212; Metodi Numerici per l&#39;analisi dati - LAB</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'my_ipynb/5_hm3_0_intro';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Esercizio 3) Ottimizzazione per \(f: \mathbb{R}^2 \to \mathbb{R}\) convessa o non-convessa" href="5_hw3_3_ottimiz.html" />
+    <link rel="prev" title="Esercizio 3) Regressione multipla" href="4_hw2_3_regrMultipla.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_disi.jpg" class="logo__image only-light" alt="Metodi Numerici per l'analisi dati - LAB - Home"/>
+    <img src="../_static/logo_disi.jpg" class="logo__image only-dark pst-js-only" alt="Metodi Numerici per l'analisi dati - LAB - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Laboratorio di Metodi Numerici per l’analisi dati
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_lab_python.html">Programmazione in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_lab_matplotlib.html">Grafica con Matplotlib</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="3_hw1_0_intro.html">Homework 1: Algebra Lineare e fattorizzazioni</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="3_hw1_1_svd.html">Esercizio 1) SVD per la classificazione</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_hw1_2_diadi.html">Esercizio 2) SVD per la compressione di immagini</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_hw1_3_lu.html">Esercizio 3) Risoluzione di sistemi lineari</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="4_hm2_0_intro.html">Homework 2: Regressione con Minimi Quadrati (algebra lineare)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="4_hw2_1_LS_datiSintetici.html">Esercizio 1) LS su dati sintetici</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_hw2_2_LS_datiReali.html">Esercizio 2) LS su dati reali</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_hw2_3_regrMultipla.html">Esercizio 3) Regressione multipla</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Homework 3: Risoluzione di equazioni non lineari e Ottimizzazione</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="5_hw3_3_ottimiz.html">Esercizio 3) Ottimizzazione per  <span class="math notranslate nohighlight">\(f: \mathbb{R}^2 \to \mathbb{R}\)</span> convessa o non-convessa</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="6_hm4.html">Homework 4</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/morottie/Metodi-per-analisi-dati-2026.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/morottie/Metodi-per-analisi-dati-2026.git/issues/new?title=Issue%20on%20page%20%2Fmy_ipynb/5_hm3_0_intro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/my_ipynb/5_hm3_0_intro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Homework 3: Risoluzione di equazioni non lineari e Ottimizzazione</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-1-risoluzione-per-funzione-con-zero-semplice">Esercizio 1) Risoluzione per funzione con zero semplice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-2-risoluzione-per-funzione-con-zeri-multipli">Esercizio 2)  Risoluzione per funzione con zeri multipli</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-3-ottimizzazione-per-f-mathbb-r-2-to-mathbb-r-convessa-o-non-convessa">Esercizio 3) Ottimizzazione per  <span class="math notranslate nohighlight">\(f: \mathbb{R}^2 \to \mathbb{R}\)</span> convessa o non-convessa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-1-algoritmi-per-lo-zero-di-una-funzione">RECAP 1: algoritmi per lo zero di una funzione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">Metodo di bisezione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">Metodo di Newton</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-2-algoritmi-di-discesa-del-gradiente-per-l-ottimizzazione">RECAP 2: algoritmi di discesa del gradiente per l’ottimizzazione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discesa-del-gradiente">Discesa del gradiente</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#focus-il-criterio-di-arresto">Focus: il criterio di arresto</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#focus-il-passo-di-discesa-e-il-backtracking">Focus: il passo di discesa e il backtracking</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="homework-3-risoluzione-di-equazioni-non-lineari-e-ottimizzazione">
+<h1>Homework 3: Risoluzione di equazioni non lineari e Ottimizzazione<a class="headerlink" href="#homework-3-risoluzione-di-equazioni-non-lineari-e-ottimizzazione" title="Link to this heading">#</a></h1>
+<section id="esercizio-1-risoluzione-per-funzione-con-zero-semplice">
+<h2>Esercizio 1) Risoluzione per funzione con zero semplice<a class="headerlink" href="#esercizio-1-risoluzione-per-funzione-con-zero-semplice" title="Link to this heading">#</a></h2>
+<p>Definire la funzione <span class="math notranslate nohighlight">\(f(x)=(4x-7)/(x-2)\)</span>  e calcolarne la derivata.
+Poi:</p>
+<ul class="simple">
+<li><p>calcolare (a mano) lo zero <code class="docutils literal notranslate"><span class="pre">x_star</span></code>;</p></li>
+<li><p>plottare <span class="math notranslate nohighlight">\(f(x)\)</span> nell’intervallo <span class="math notranslate nohighlight">\([1, 1.9]\)</span>  e individuare graficamente lo zero;</p></li>
+<li><p>implementare il metodo di bisezione e i metodi di Newton e delle secanti in modo che stampino ad ogni iterazione il punto <span class="math notranslate nohighlight">\(x_k\)</span> calcolato e il valore della funzione in quel punto.</p></li>
+</ul>
+<p>Per il metodo di bisezione:</p>
+<ul class="simple">
+<li><p>lanciare il metodo di bisezione per la ricerca dello zero tra <code class="docutils literal notranslate"><span class="pre">a=1</span></code> e <code class="docutils literal notranslate"><span class="pre">b=1.9</span></code>;</p></li>
+<li><p>memorizzare punti medi e ampiezze degli intervalli ad ogni iterazione;</p></li>
+<li><p>provare le tolleranze <code class="docutils literal notranslate"><span class="pre">tol</span></code> pari a <span class="math notranslate nohighlight">\(10^{-4}, 10^{-8}, 10^{-12}\)</span>;</p></li>
+<li><p>confrontare le approssimazioni iterative con la stima teorica <code class="docutils literal notranslate"><span class="pre">x_star</span></code>.</p></li>
+</ul>
+<p>Per il metodo di Newton:</p>
+<ul class="simple">
+<li><p>lanciare il metodo di Newton con <span class="math notranslate nohighlight">\(x_0 = 1.9\)</span>, poi testare <span class="math notranslate nohighlight">\(x_0 = {1, 1.5, 1.6}\)</span>;</p></li>
+<li><p>provare le tolleranze <code class="docutils literal notranslate"><span class="pre">tol</span></code> pari a <span class="math notranslate nohighlight">\(10^{-4}, 10^{-8}, 10^{-12}\)</span>;</p></li>
+<li><p>confrontare le approssimazioni iterative con la stima teorica <code class="docutils literal notranslate"><span class="pre">x_star</span></code> e plottare come si riduce l’errore di approssimazione.</p></li>
+</ul>
+</section>
+<section id="esercizio-2-risoluzione-per-funzione-con-zeri-multipli">
+<h2>Esercizio 2)  Risoluzione per funzione con zeri multipli<a class="headerlink" href="#esercizio-2-risoluzione-per-funzione-con-zeri-multipli" title="Link to this heading">#</a></h2>
+<p>Definire la funzione <span class="math notranslate nohighlight">\(f(x)=(x+1)^4 (x-3)\)</span> e calcolarne la derivata.
+Poi:</p>
+<ul class="simple">
+<li><p>calcolare (a mano) gli zeri <span class="math notranslate nohighlight">\(x^*\)</span> di <span class="math notranslate nohighlight">\(f\)</span> e determinarne la molteplicità;</p></li>
+<li><p>plottare la funzione in <span class="math notranslate nohighlight">\([-3, 3.5]\)</span> e individuare graficamente gli zeri;</p></li>
+<li><p>provare il metodo di bisezione settando  <span class="math notranslate nohighlight">\(a, b\)</span> opportunamente;</p></li>
+<li><p>provare il metodo Newton con <span class="math notranslate nohighlight">\(x_0=-2\)</span> e <span class="math notranslate nohighlight">\(x_0=4\)</span>;</p></li>
+<li><p>confrontare le soluzioni ottenute e analizzare se si trovano tutti gli zeri con ciascun metodo;</p></li>
+<li><p>per il metodo di bisezione, analizzare la convergenza;</p></li>
+<li><p>per il metodo di Newton, confrontare i rapporti fra gli errori <span class="math notranslate nohighlight">\(e_k = |x^* - x_k|\)</span> compiuti rispetto alle soluzioni esatte, stampando per ciascuna risoluzione</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\frac{e_{k+1}}{e_{k}}  \qquad e \qquad \frac{e_{k+1}}{e_{k}^2}
+\]</div>
+</section>
+<section id="esercizio-3-ottimizzazione-per-f-mathbb-r-2-to-mathbb-r-convessa-o-non-convessa">
+<h2>Esercizio 3) Ottimizzazione per  <span class="math notranslate nohighlight">\(f: \mathbb{R}^2 \to \mathbb{R}\)</span> convessa o non-convessa<a class="headerlink" href="#esercizio-3-ottimizzazione-per-f-mathbb-r-2-to-mathbb-r-convessa-o-non-convessa" title="Link to this heading">#</a></h2>
+<p>Considerare la funzione</p>
+<div class="math notranslate nohighlight">
+\[
+   f(x_1, x_2) = (x_1-1)^2   +  2(x_2+2)^2 + 3,
+   \]</div>
+<p>che ha minimo nel punto <span class="math notranslate nohighlight">\(x^* =(1,-2)\)</span>.</p>
+<p>Poi:</p>
+<ol class="arabic">
+<li><p>definire le funzioni python per <code class="docutils literal notranslate"><span class="pre">f</span></code> e <code class="docutils literal notranslate"><span class="pre">grad_f</span></code>;</p></li>
+<li><p>calcolare il valore di <span class="math notranslate nohighlight">\(f(x^*)\)</span> e verificare che <span class="math notranslate nohighlight">\(x^*\)</span> è un punto stazionario di <span class="math notranslate nohighlight">\(f\)</span>;</p></li>
+<li><p>visualizzare la superficie descritta da <code class="docutils literal notranslate"><span class="pre">f</span></code> nel dominio <span class="math notranslate nohighlight">\([-3,5] \times [-6,2]\)</span> e le curve di livello;</p></li>
+<li><p>eseguire il metodo di discesa del gradiente con passo fisso, avendo definito</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_0 = (4, -1)\)</span> come punto di partenza</p></li>
+<li><p>maxit = 1000</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha = 0.001\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(tol_{grad} = 1e-6\)</span></p></li>
+</ul>
+<p>Calcolare la distanza (errore in norma) fra la soluzione ottenuta e <span class="math notranslate nohighlight">\(x^*\)</span>, poi creare i seguenti plot:</p>
+<ul class="simple">
+<li><p>grafico con iterazioni in ascissa e valore della funzione in ordinata;</p></li>
+<li><p>grafico con iterazioni in ascissa e gradiente della funzione in ordinata.</p></li>
+</ul>
+</li>
+<li><p>provare diversi valori dei parametri:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\alpha = 1,\ 0.5,\ 0.1,\ 0.01,\ 0.00001\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(tol_{grad} = 0.1,\ 0.001\)</span></p></li>
+<li><p>altri punti di partenza <span class="math notranslate nohighlight">\(x_0\)</span></p></li>
+</ul>
+<p>e tenere traccia dei risultati ottenuti (suggerimento: tabella degli errori, al variare dei parametri).</p>
+</li>
+<li><p>eseguire il metodo di discesa del gradiente con backtracking, avendo definito</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_0 = (4, -1)\)</span> come punto di partenza</p></li>
+<li><p>maxit = 1000</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha_0 = 0.001\)</span></p></li>
+</ul>
+</li>
+<li><p>eseguire il metodo di discesa del gradiente con backtracking, provando diversi valori di <span class="math notranslate nohighlight">\(\alpha_0\)</span></p></li>
+</ol>
+<p>Ripetere l’esercizio considerando la funzione di Rosenbrock</p>
+<div class="math notranslate nohighlight">
+\[
+   f(x_1, x_2) = (1-x_1)^2   +  100(x_2-x_1^2)^2 
+   \]</div>
+<p>che ha minimo nel punto <span class="math notranslate nohighlight">\(x^* =(1,1)\)</span>.
+In questo caso:</p>
+<ul class="simple">
+<li><p>nel punto 3, visualizzare la superficie nel dominio <span class="math notranslate nohighlight">\([-2,5] \times [-3,5]\)</span>;</p></li>
+<li><p>plottare la funzione fissando</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(x_2 = 1\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_2 = -1\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_1 = 0\)</span>;</p></li>
+</ul>
+</li>
+<li><p>nel punto 4, eseguire il metodo con passo fisso usando <span class="math notranslate nohighlight">\(tol_{grad} = 1e-6\)</span>, maxit = 1000, <span class="math notranslate nohighlight">\(\alpha = \ 0.001 \)</span> e <span class="math notranslate nohighlight">\(x_0 = (2,2)\)</span>;</p></li>
+<li><p>nel punto 5, provare i seguenti parametri maxit = 10000, <span class="math notranslate nohighlight">\(\alpha = \ 0.01 \)</span>, <span class="math notranslate nohighlight">\(x_0 = (-2, -2)\)</span>;</p></li>
+<li><p>nel punto 6, eseguire il metodo con backtracking con i parametri maxit = 10000, <span class="math notranslate nohighlight">\(\alpha = \ 0.01 \)</span>, <span class="math notranslate nohighlight">\(x_0 = (-2, -2)\)</span>.</p></li>
+</ul>
+</section>
+<section id="recap-1-algoritmi-per-lo-zero-di-una-funzione">
+<h2>RECAP 1: algoritmi per lo zero di una funzione<a class="headerlink" href="#recap-1-algoritmi-per-lo-zero-di-una-funzione" title="Link to this heading">#</a></h2>
+<p>Data una funzione non lineare <span class="math notranslate nohighlight">\(f:\mathbb{R}\to\mathbb{R}\)</span>, vogliamo determinare le <strong>radici</strong> dell’equazione <span class="math notranslate nohighlight">\(f(x)=0\)</span>, dette anche <strong>zeri della funzione</strong>, cioè i valori <span class="math notranslate nohighlight">\(x^*\)</span> tali che</p>
+<div class="math notranslate nohighlight">
+\[
+f(x^*)=0.
+\]</div>
+<p>A seconda della funzione, possono non esistere zeri reali, essercene uno solo, un numero finito oppure infiniti.</p>
+<p>I <strong>metodi numerici iterativi</strong> consentono di approssimare uno zero costruendo una successione di valori <span class="math notranslate nohighlight">\(x_k\)</span>. Il procedimento viene ripetuto fino a soddisfare un opportuno <strong>criterio di arresto</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">eps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">eps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.220446049250313e-16
+</pre></div>
+</div>
+</div>
+</div>
+<section id="metodo-di-bisezione">
+<h3>Metodo di bisezione<a class="headerlink" href="#metodo-di-bisezione" title="Link to this heading">#</a></h3>
+<p>Richiede una funzione continua in <span class="math notranslate nohighlight">\([a,b]\)</span> con <span class="math notranslate nohighlight">\(f(a)\cdot f(b)&lt;0\)</span>.</p>
+<p>A ogni iterazione si calcola il punto medio</p>
+<div class="math notranslate nohighlight">
+\[
+m=\frac{a+b}{2}
+\]</div>
+<p>e si conserva la metà dell’intervallo in cui la funzione cambia segno. Se <span class="math notranslate nohighlight">\(f(m)=0\)</span>, il metodo termina.</p>
+<p>NB:</p>
+<ul class="simple">
+<li><p>Garantisce la convergenza sotto le ipotesi indicate.</p></li>
+<li><p>Dimezza l’ampiezza dell’intervallo a ogni iterazione.</p></li>
+<li><p>L’errore del punto medio è al più metà dell’ampiezza dell’intervallo corrente.</p></li>
+</ul>
+<p><img alt="" src="../_images/hw2_bisezione.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bisezione</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+
+    <span class="n">fa</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">fb</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">iterati</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Controllo degli estremi</span>
+    <span class="k">if</span> <span class="n">fa</span> <span class="o">*</span> <span class="n">fb</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;La funzione deve cambiare segno in [a, b].&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">fa</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">iterati</span>
+
+    <span class="k">if</span> <span class="n">fb</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">iterati</span>
+
+    
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+
+        <span class="c1"># Punto medio e valore della funzione</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">fm</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+        <span class="c1"># Memorizzo l&#39;approssimazione corrente</span>
+        <span class="n">iterati</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+        <span class="c1"># Criterio di arresto</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">tol</span>  <span class="ow">or</span> <span class="n">fm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Raggiunto il criterio di arresto.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">iterati</span>
+
+        <span class="c1"># Seleziono il sottointervallo con cambio di segno, per la prossima iterazione</span>
+        <span class="k">if</span> <span class="n">fa</span> <span class="o">*</span> <span class="n">fm</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">m</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">m</span>
+            <span class="n">fa</span> <span class="o">=</span> <span class="n">fm</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Raggiunto il numero massimo di iterazioni.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">iterati</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="metodo-di-newton">
+<h3>Metodo di Newton<a class="headerlink" href="#metodo-di-newton" title="Link to this heading">#</a></h3>
+<p>A partire da un punto iniziale <span class="math notranslate nohighlight">\(x_0\)</span>, si calcola
+$<span class="math notranslate nohighlight">\(
+x_{k+1}=x_k-\frac{f(x_k)}{f'(x_k)}.
+\)</span>$</p>
+<p>Il nuovo iterato è l’intersezione della tangente al grafico in <span class="math notranslate nohighlight">\((x_k,f(x_k))\)</span> con l’asse delle ascisse.</p>
+<p>NB:</p>
+<ul class="simple">
+<li><p>Richiede la derivata prima.</p></li>
+<li><p>Per uno zero semplice, con sufficiente regolarità e un punto iniziale abbastanza vicino, la convergenza è quadratica.</p></li>
+<li><p>Può fallire se la derivata si annulla o il punto iniziale non è adeguato.</p></li>
+<li><p>Per zeri multipli, la convergenza è generalmente lineare.</p></li>
+</ul>
+<p><img alt="" src="../_images/hw2_newton.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tol_x</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">tol_f</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>    <span class="c1"># x = float(x0)       </span>
+    <span class="n">iterati</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;k = 0, x = </span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">.15f</span><span class="si">}</span><span class="s2">, f(x) = </span><span class="si">{</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Controllo del punto iniziale</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">tol_f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">iterati</span>
+    
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+
+        <span class="n">fx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">dfx</span> <span class="o">=</span> <span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="c1"># Controllo della derivata</span>
+        <span class="k">if</span> <span class="n">dfx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Derivata nulla: impossibile proseguire.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Nuova approssimazione</span>
+        <span class="n">x_nuovo</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">fx</span> <span class="o">/</span> <span class="n">dfx</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;k = </span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">, x = </span><span class="si">{</span><span class="n">x_nuovo</span><span class="si">:</span><span class="s2">.15f</span><span class="si">}</span><span class="s2">, f(x) = </span><span class="si">{</span><span class="n">f</span><span class="p">(</span><span class="n">x_nuovo</span><span class="p">)</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">iterati</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_nuovo</span><span class="p">)</span>
+
+        <span class="c1"># Incremento e residuo</span>
+        <span class="n">incremento</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_nuovo</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">residuo</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x_nuovo</span><span class="p">))</span>       <span class="c1"># sarebbe: abs(f(x_nuovo) - f(x_star)) = abs(f(x_nuovo) - 0)</span>
+
+        <span class="c1"># Criteri di arresto</span>
+        <span class="k">if</span> <span class="n">incremento</span> <span class="o">&lt;=</span> <span class="n">tol_x</span> <span class="o">+</span> <span class="n">eps</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x_nuovo</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="ow">or</span> <span class="n">residuo</span> <span class="o">&lt;=</span> <span class="n">tol_f</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Raggiunto un criterio di arresto.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">x_nuovo</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">iterati</span>
+
+        <span class="c1"># Aggiornamento per la prossima iterazione</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x_nuovo</span>
+
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Raggiunto il numero massimo di iterazioni.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">,</span> <span class="n">iterati</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="recap-2-algoritmi-di-discesa-del-gradiente-per-l-ottimizzazione">
+<h2>RECAP 2: algoritmi di discesa del gradiente per l’ottimizzazione<a class="headerlink" href="#recap-2-algoritmi-di-discesa-del-gradiente-per-l-ottimizzazione" title="Link to this heading">#</a></h2>
+<p>Data una funzione <span class="math notranslate nohighlight">\( f : \mathbb{R}^n \to \mathbb{R}\)</span>, vogliamo risolvere il problema di minimo</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{x \in \mathbb{R}^n} f(x).
+\]</div>
+<p><img alt="" src="../_images/superficie.png" /></p>
+<section id="discesa-del-gradiente">
+<h3>Discesa del gradiente<a class="headerlink" href="#discesa-del-gradiente" title="Link to this heading">#</a></h3>
+<p>In questo algoritmo, si sceglie sempre la direzione di discesa come l’antigradiente, ossia</p>
+<div class="math notranslate nohighlight">
+\[ \mathbf{p}^{(k)} = -\nabla f(\mathbf{x}^{(k)}).\]</div>
+<p>Di conseguenza, l’aggiornamento assume la forma <span class="math notranslate nohighlight">\( \mathbf{x}^{(k+1)} = \mathbf{x}^{(k)} - \alpha_k \nabla f(\mathbf{x}^{(k)})\)</span>.</p>
+<p>Esempio con <span class="math notranslate nohighlight">\(\alpha_k = 1\)</span>:
+<img alt="Esempio con " src="../_images/algo_GD_02.png" /></p>
+<section id="focus-il-criterio-di-arresto">
+<h4>Focus: il criterio di arresto<a class="headerlink" href="#focus-il-criterio-di-arresto" title="Link to this heading">#</a></h4>
+<p>L’algoritmo di discesa termina quando la norma del gradiente è sufficientemente piccola</p>
+<div class="math notranslate nohighlight">
+\[
+\left|\nabla f(\mathbf{x}^{(k)})\right|2
+\leq tol_{grad},
+\]</div>
+<p>oppure quando viene raggiunto il numero massimo di iterazioni.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">discesa_gradiente</span><span class="p">(</span>
+    <span class="n">f</span><span class="p">,</span>              <span class="c1"># funzione obiettivo</span>
+    <span class="n">grad_f</span><span class="p">,</span>         <span class="c1"># gradiente della funzione obiettivo</span>
+    <span class="n">x0</span><span class="p">,</span>             <span class="c1"># punto iniziale </span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>      <span class="c1"># lunghezza del passo, alpha&gt;0</span>
+    <span class="n">tol_grad</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span>  <span class="c1"># tolleranza sulla norma del gradiente</span>
+    <span class="n">maxit</span><span class="o">=</span><span class="mi">1000</span>      <span class="c1"># massimo numero di iterazioni</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Discesa del gradiente con passo fisso.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Inizializzazioni</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">grad_f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">grad_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
+
+    <span class="n">history</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()],</span>
+        <span class="s2">&quot;f&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">fx</span><span class="p">],</span>
+        <span class="s2">&quot;grad_norm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">grad_norm</span><span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Ciclo iterativo di risoluzione</span>
+    <span class="k">while</span> <span class="n">grad_norm</span> <span class="o">&gt;</span> <span class="n">tol_grad</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">maxit</span><span class="p">:</span>
+
+        <span class="c1"># Direzione di discesa</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="o">-</span><span class="n">grad</span>
+
+        <span class="c1"># Aggiornamento dell&#39;iterata</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">p</span>
+        <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Aggiornamento delle quantità</span>
+        <span class="n">fx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">grad_f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">grad_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
+
+        <span class="c1"># Salvataggio della storia</span>
+        <span class="n">history</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+        <span class="n">history</span><span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span>
+        <span class="n">history</span><span class="p">[</span><span class="s2">&quot;grad_norm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grad_norm</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">grad_norm</span> <span class="o">&lt;=</span> <span class="n">tol_grad</span><span class="p">:</span>  <span class="c1"># x è punto stazionario</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Convergenza numerica raggiunta in </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> iterazioni.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Raggiunto il numero massimo di iterazioni.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">history</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="focus-il-passo-di-discesa-e-il-backtracking">
+<h4>Focus: il passo di discesa e il backtracking<a class="headerlink" href="#focus-il-passo-di-discesa-e-il-backtracking" title="Link to this heading">#</a></h4>
+<p>Il parametro <span class="math notranslate nohighlight">\(\alpha_k&gt;0\)</span> rappresenta la lunghezza del passo di discesa. Può essere costante e non variare mai nelle iterazioni, oppure può variare usando una regola di backtracking. In questo secondo caso, si parte da un valore iniziale <span class="math notranslate nohighlight">\(\alpha_0\)</span> e lo si riduce secondo la regola</p>
+<div class="math notranslate nohighlight">
+\[ 
+\alpha_k \leftarrow \rho\alpha_k,
+\qquad 0&lt;\rho&lt;1,
+\]</div>
+<p>finché non viene soddisfatta la condizione di Armijo:</p>
+<div class="math notranslate nohighlight">
+\[
+f(\mathbf{x}^{(k)} +\alpha_k \mathbf{p}^{(k)} )
+\leq
+f(\mathbf{x}^{(k)} ) + c_1\alpha_k \nabla f(\mathbf{x}^{(k)} )^T\mathbf{p}^{(k)} ,
+\qquad 0&lt;c_1&lt;1.
+\]</div>
+<p>Attenzione: se <span class="math notranslate nohighlight">\(\alpha_k\)</span> diventa troppo piccolo, il passo diventa troppo breve e non si converge velocemente alla soluzione! E’ bene quindi impostare una soglia (parametro <span class="math notranslate nohighlight">\(\tau\)</span>) al di sotto del quale il backtracking si ferma per garantire <span class="math notranslate nohighlight">\(\alpha_k\geq\tau\)</span>.</p>
+<p>Esempio con backtracking (BT):
+<img alt="Esempio con bt" src="../_images/algo_GD_03.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">discesa_gradiente_bt</span><span class="p">(</span>
+    <span class="n">f</span><span class="p">,</span>              <span class="c1"># funzione obiettivo</span>
+    <span class="n">grad_f</span><span class="p">,</span>         <span class="c1"># gradiente della funzione obiettivo</span>
+    <span class="n">x0</span><span class="p">,</span>             <span class="c1"># punto iniziale </span>
+    <span class="n">alpha0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>     <span class="c1"># lunghezza del passo iniziale, 0&lt;alpha</span>
+    <span class="n">rho</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>        <span class="c1"># fattore di riduzione del passo, 0&lt;rho&lt;1</span>
+    <span class="n">c1</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>        <span class="c1"># parametro della condizione di Armijo, 0&lt;c1&lt;1</span>
+    <span class="n">tau</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span>      <span class="c1"># lunghezza del minimo passo ammesso, 0&lt;rho&lt;alpha</span>
+    <span class="n">tol_grad</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span>  <span class="c1"># tolleranza sulla norma del gradiente</span>
+    <span class="n">maxit</span><span class="o">=</span><span class="mi">1000</span>      <span class="c1"># massimo numero di iterazioni</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Discesa del gradiente con backtracking di Armijo.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Controlli sugli imput</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">rho</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;rho deve appartenere a (0, 1).&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">c1</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;c1 deve appartenere a (0, 1).&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">tau</span> <span class="o">&lt;=</span> <span class="n">alpha0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;tau deve essere positivo e non superiore ad alpha0.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Inizializzazioni</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">grad_f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">grad_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
+
+    <span class="n">history</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()],</span>
+        <span class="s2">&quot;f&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">fx</span><span class="p">],</span>
+        <span class="s2">&quot;grad_norm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">grad_norm</span><span class="p">],</span>
+        <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Ciclo iterativo di risoluzione</span>
+    <span class="k">while</span> <span class="n">grad_norm</span> <span class="o">&gt;</span> <span class="n">tol_grad</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">maxit</span><span class="p">:</span>
+
+        <span class="c1"># Direzione di discesa</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="o">-</span><span class="n">grad</span>
+
+        <span class="c1"># Scelta del passo di discesa</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha0</span>
+
+        <span class="k">while</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">fx</span> <span class="o">+</span> <span class="n">c1</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">grad</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span> <span class="c1"># Backtracking di Armijo</span>
+
+            <span class="k">if</span> <span class="n">alpha</span> <span class="o">&lt;=</span> <span class="n">tau</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Passo minimo raggiunto senza soddisfare Armijo.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">history</span>
+
+            <span class="n">alpha</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
+
+        <span class="c1"># Aggiornamento dell&#39;iterata</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">p</span>
+        <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Aggiornamento delle quantità</span>
+        <span class="n">fx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">grad_f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">grad_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
+
+        <span class="c1"># Salvataggio della storia</span>
+        <span class="n">history</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+        <span class="n">history</span><span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span>
+        <span class="n">history</span><span class="p">[</span><span class="s2">&quot;grad_norm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grad_norm</span><span class="p">)</span>
+        <span class="n">history</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">grad_norm</span> <span class="o">&lt;=</span> <span class="n">tol_grad</span><span class="p">:</span>  <span class="c1"># x è punto stazionario</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Convergenza numerica raggiunta in </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> iterazioni.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Raggiunto il numero massimo di iterazioni.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">history</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./my_ipynb"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="4_hw2_3_regrMultipla.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Esercizio 3) Regressione multipla</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="5_hw3_3_ottimiz.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Esercizio 3) Ottimizzazione per  <span class="math notranslate nohighlight">\(f: \mathbb{R}^2 \to \mathbb{R}\)</span> convessa o non-convessa</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-1-risoluzione-per-funzione-con-zero-semplice">Esercizio 1) Risoluzione per funzione con zero semplice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-2-risoluzione-per-funzione-con-zeri-multipli">Esercizio 2)  Risoluzione per funzione con zeri multipli</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-3-ottimizzazione-per-f-mathbb-r-2-to-mathbb-r-convessa-o-non-convessa">Esercizio 3) Ottimizzazione per  <span class="math notranslate nohighlight">\(f: \mathbb{R}^2 \to \mathbb{R}\)</span> convessa o non-convessa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-1-algoritmi-per-lo-zero-di-una-funzione">RECAP 1: algoritmi per lo zero di una funzione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">Metodo di bisezione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">Metodo di Newton</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-2-algoritmi-di-discesa-del-gradiente-per-l-ottimizzazione">RECAP 2: algoritmi di discesa del gradiente per l’ottimizzazione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discesa-del-gradiente">Discesa del gradiente</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#focus-il-criterio-di-arresto">Focus: il criterio di arresto</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#focus-il-passo-di-discesa-e-il-backtracking">Focus: il passo di discesa e il backtracking</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Elena Morotti
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
